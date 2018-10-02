@@ -5,6 +5,7 @@
  */
 package rest;
 
+import com.google.gson.Gson;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -22,30 +23,20 @@ import javax.ws.rs.core.MediaType;
 @Path("person")
 public class RestPerson {
 
+    Gson gson = new Gson();
+    
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of restPerson
-     */
     public RestPerson() {
     }
-
-    /**
-     * Retrieves representation of an instance of com.mycompany.uge40courseassignment2.restPerson
-     * @return an instance of java.lang.String
-     */
+    
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getJson() {
+        return gson.toJson("This is a restful API");
     }
-
-    /**
-     * PUT method for updating or creating an instance of restPerson
-     * @param content representation for the resource
-     */
+    
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
     public void putXml(String content) {

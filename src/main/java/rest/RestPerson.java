@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.uge40courseassignment2;
+package rest;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;

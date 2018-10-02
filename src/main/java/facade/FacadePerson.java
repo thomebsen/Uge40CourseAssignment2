@@ -5,6 +5,9 @@
  */
 package facade;
 
+import entity.Person;
+import java.util.List;
+
 /**
  *
  * @author Oliver
@@ -17,12 +20,12 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public Object getPersonWithHobby(String hobbyName) {
+    public List<Person> getPersonWithHobby(String hobbyName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object getAllPersonsByZip(int zipCode) {
+    public List<Person> getAllPersonsByZip(int zipCode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -45,5 +48,7 @@ public class FacadePerson implements FacadePersonInterface {
     public Person deletePerson(Person person) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
 }

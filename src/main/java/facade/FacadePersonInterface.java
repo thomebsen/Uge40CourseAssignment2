@@ -5,6 +5,9 @@
  */
 package facade;
 
+import entity.Person;
+import java.util.List;
+
 /**
  *
  * @author Oliver

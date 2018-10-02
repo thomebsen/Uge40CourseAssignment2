@@ -5,6 +5,9 @@
  */
 package facade;
 
+import entity.CityInfo;
+import java.util.List;
+
 /**
  *
  * @author Oliver

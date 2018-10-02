@@ -20,11 +20,48 @@ public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String email;
     private String frirstName;
     private String lastName;
+
+    public Person() {
+    }
+
+    public Person(String email, String frirstName, String lastName) {
+        this.email = email;
+        this.frirstName = frirstName;
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFrirstName() {
+        return frirstName;
+    }
+
+    public void setFrirstName(String frirstName) {
+        this.frirstName = frirstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
+    
+    
+    
     
     public Integer getId() {
         return id;

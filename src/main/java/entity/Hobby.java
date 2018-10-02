@@ -20,8 +20,34 @@ public class Hobby implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String hobbyName;
+    private String description;
+
+    public Hobby() {
+    }
+
+    public Hobby(String hobbyName, String description) {
+        this.hobbyName = hobbyName;
+        this.description = description;
+    }
+
+    public String getHobbyName() {
+        return hobbyName;
+    }
+
+    public void setHobbyName(String hobbyName) {
+        this.hobbyName = hobbyName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Integer getId() {
         return id;
@@ -55,5 +81,5 @@ public class Hobby implements Serializable {
     public String toString() {
         return "entity.Hobby[ id=" + id + " ]";
     }
-    
+
 }

@@ -16,41 +16,42 @@ import javax.persistence.Id;
  * @author Andreas
  */
 @Entity
-public class Phone implements Serializable {
+public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int number;
-    private String description;
+    private String street;
+    private String additionaInfo;
 
-    public Phone() {
+    public Address() {
     }
 
-    public Phone(int number, String description) {
-        this.number = number;
-        this.description = description;
+    public Address(String street, String additionaInfo) {
+        this.street = street;
+        this.additionaInfo = additionaInfo;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getAdditionaInfo() {
+        return additionaInfo;
+    }
+
+    public void setAdditionaInfo(String additionaInfo) {
+        this.additionaInfo = additionaInfo;
     }
 
     
     
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    
     public Integer getId() {
         return id;
     }
@@ -69,10 +70,10 @@ public class Phone implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Phone)) {
+        if (!(object instanceof Address)) {
             return false;
         }
-        Phone other = (Phone) object;
+        Address other = (Address) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -81,7 +82,7 @@ public class Phone implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Phone[ id=" + id + " ]";
+        return "entity.Address[ id=" + id + " ]";
     }
-
+    
 }

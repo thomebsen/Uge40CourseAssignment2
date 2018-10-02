@@ -7,6 +7,8 @@ package facade;
 
 import entity.Person;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -14,9 +16,24 @@ import java.util.List;
  */
 public class FacadePerson implements FacadePersonInterface {
 
+    EntityManagerFactory emf;
+
+    public FacadePerson(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     @Override
     public Person getPersonByPhone(String number) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Person person = em.find(Person.class, number); //Måske dette skal være PersonDTO..
+            em.getTransaction().commit();
+            return person;
+        } finally {
+            em.close();
+        }
+        
     }
 
     @Override
@@ -36,19 +53,42 @@ public class FacadePerson implements FacadePersonInterface {
 
     @Override
     public Person addPerson(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(person);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
+        return person;
     }
 
     @Override
     public Person editPerson(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(person);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
+        return person;
     }
 
     @Override
-    public Person deletePerson(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deletePerson(Person person) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.remove(person);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
-    
-    
 }

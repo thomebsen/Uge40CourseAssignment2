@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
  * @author thoma
  */
 @Path("person")
-public class restPerson {
+public class RestPerson {
 
     @Context
     private UriInfo context;
@@ -28,7 +28,7 @@ public class restPerson {
     /**
      * Creates a new instance of restPerson
      */
-    public restPerson() {
+    public RestPerson() {
     }
 
     /**

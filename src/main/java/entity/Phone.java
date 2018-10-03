@@ -29,9 +29,8 @@ public class Phone implements Serializable {
     
     @ManyToOne
     private Person person;
-
-    
-    
+   
+ 
     
     
     

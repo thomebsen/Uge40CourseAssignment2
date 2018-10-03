@@ -40,5 +40,6 @@ public class RestPerson {
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
     public void putXml(String content) {
+        
     }
 }

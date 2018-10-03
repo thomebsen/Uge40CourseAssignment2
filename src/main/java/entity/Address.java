@@ -32,12 +32,12 @@ public class Address implements Serializable {
     private String additionalInfo;
     
     
- 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
+    private List<Person> persons = new ArrayList();
+   
+    
     @ManyToOne
     private CityInfo cityInfo;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adress")
-    private List<Person> persons;
 
     public Address() {
     }

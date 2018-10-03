@@ -9,6 +9,7 @@ import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,30 +29,24 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Person_ID;
+    private Integer id;
     private String email;
     private String frirstName;
     private String lastName;
     
-    @OneToMany(cascade = ALL, mappedBy = "person")
-    private List<Phone> phones = new ArrayList<>();
-    
-    @ManyToMany(cascade = ALL)
-    private List<Hobby> hobbies = new ArrayList<>();
-    
-    @ManyToOne(cascade = ALL)
-    private Address adress;
-
-    public List<Phone> getPhones() {
-        return phones;
-    }
-
-    public void AddPhones(Phone phone) {
-        phones.add(phone);
-    }
+   
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<Phone> phones = new ArrayList();
+   
+    @ManyToOne
+    private Address address;
     
     
-  
+   @ManyToMany(cascade = CascadeType.ALL, mappedBy = "persons")
+   private List<Hobby> hobbies = new ArrayList();
+    
+    
+    
 
     public Person() {
     }
@@ -91,17 +86,17 @@ public class Person implements Serializable {
     
     
     public Integer getId() {
-        return Person_ID;
+        return id;
     }
 
     public void setId(Integer id) {
-        this.Person_ID = id;
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (Person_ID != null ? Person_ID.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -112,7 +107,7 @@ public class Person implements Serializable {
             return false;
         }
         Person other = (Person) object;
-        if ((this.Person_ID == null && other.Person_ID != null) || (this.Person_ID != null && !this.Person_ID.equals(other.Person_ID))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -120,7 +115,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Person[ id=" + Person_ID + " ]";
+        return "entity.Person[ id=" + id + " ]";
     }
     
 }

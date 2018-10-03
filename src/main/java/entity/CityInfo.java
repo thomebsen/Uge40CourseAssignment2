@@ -8,6 +8,7 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,9 +31,11 @@ public class CityInfo implements Serializable {
     private String city;
     
     
-    @OneToMany(cascade = ALL, mappedBy = "cityInfo")
-    private List<Address>addresses = new ArrayList();
-
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityInfo")
+    private List<Address> adresses = new ArrayList();
+    
+    
     public CityInfo(int zipCode, String city) {
         this.zipCode = zipCode;
         this.city = city;

@@ -5,6 +5,7 @@
  */
 package rest;
 
+import entity.Address;
 import entity.Person;
 import entity.PersonDTO;
 import facade.FacadePerson;
@@ -16,30 +17,24 @@ import javax.persistence.Persistence;
  * @author thoma
  */
 public class main {
+
     public static void main(String[] args) {
-        
-
-
-
-
-
 
         //Oliver tests:
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpapu");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         FacadePerson fp = new FacadePerson(emf);
         PersonDTO personDTO = new PersonDTO();
         Person person = new Person();
-        
-        person.setFrirstName("testperson");
-        person.setLastName("testesen");
+        Address address = new Address("Westside", "This is my homeboy jimmy D's address");
+
+        person.setFrirstName("Jajeet");
+        person.setLastName("Jones");
         person.setEmail("test@test1.dk");
         
+        person.setAdress(address);
+
         fp.addPerson(person);
-        
-        
-        
-        
-        
+
     }
-    
+
 }

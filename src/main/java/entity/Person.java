@@ -42,6 +42,14 @@ public class Person implements Serializable {
     @ManyToOne(cascade = ALL)
     private Address adress;
 
+    public Address getAdress() {
+        return adress;
+    }
+
+    public void setAdress(Address adress) {
+        this.adress = adress;
+    }
+
     public List<Phone> getPhones() {
         return phones;
     }

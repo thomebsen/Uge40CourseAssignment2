@@ -27,7 +27,7 @@ public class main {
         //Oliver tests:
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpapu");
         FacadePerson fp = new FacadePerson(emf);
-        PersonDTO personDTO = new PersonDTO();
+       
         Person person = new Person();
         
         person.setFrirstName("testperson");

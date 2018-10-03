@@ -41,17 +41,53 @@ public class FacadePerson implements FacadePersonInterface {
 
     @Override
     public List<PersonDTO> getPersonWithHobby(String hobbyName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        List<PersonDTO> persons = null;
+        try {
+            em.getTransaction().begin();
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Hobby.hobbyName =" + hobbyName, PersonDTO.class);
+            persons = query.getResultList();
+            em.getTransaction().commit();
+            return persons;
+            
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public List<PersonDTO> getAllPersonsByZip(int zipCode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        List<PersonDTO> persons = null;
+        try {
+            em.getTransaction().begin();
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p WHERE CityInfo.zipCode =" + zipCode, PersonDTO.class);
+            persons = query.getResultList();
+            em.getTransaction().commit();
+            return persons;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public int getNumberOfPersonWithHobby(String hobbyName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        int personCount = 0;
+        List<PersonDTO> persons = null;
+        try {
+            em.getTransaction().begin();
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Hobby.hobbyName =" + hobbyName, PersonDTO.class);
+            persons = query.getResultList();
+            em.getTransaction().commit();
+            for (int i = 0; i < persons.size(); i++) {
+                personCount++;
+                
+            }
+            return personCount;
+        } finally {
+            em.close();
+        }
     }
 
     @Override

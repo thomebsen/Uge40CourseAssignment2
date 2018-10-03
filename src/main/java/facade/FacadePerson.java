@@ -5,6 +5,7 @@
  */
 package facade;
 
+import entity.PersonDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

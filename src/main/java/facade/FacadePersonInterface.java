@@ -6,6 +6,7 @@
 package facade;
 
 import entity.Person;
+import entity.PersonDTO;
 import java.util.List;
 
 /**

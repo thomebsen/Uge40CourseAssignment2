@@ -80,6 +80,14 @@ public class Person implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void addPhones(Phone phone) {
+        phones.add(phone);
+    }
     
     
     

@@ -5,9 +5,13 @@
  */
 package rest;
 
+import entity.Address;
+import entity.Hobby;
 import entity.Person;
 import entity.PersonDTO;
+import entity.Phone;
 import facade.FacadePerson;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -25,16 +29,16 @@ public class main {
 
 
         //Oliver tests:
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpapu");
-        FacadePerson fp = new FacadePerson(emf);
-       
-        Person person = new Person();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+        EntityManager em = emf.createEntityManager();
         
-        person.setFrirstName("testperson");
-        person.setLastName("testesen");
-        person.setEmail("test@test1.dk");
         
-        fp.addPerson(person);
+        Person person = new Person("AndreasJ54@gmail.com", "Andreas", "Jøgensen");
+        Phone phone = new Phone(42676936, "Mobile");
+        Address address = new Address("Morbærhaven 3-42", "Fedeste hjem");
+        Hobby hobby = new Hobby("Gaming", "Game games, for fun games");
+        
+        
         
         
         

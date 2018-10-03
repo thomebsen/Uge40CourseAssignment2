@@ -6,10 +6,16 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -23,14 +29,22 @@ public class Address implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String street;
-    private String additionaInfo;
+    private String additionalInfo;
+    
+    
+ 
+    @ManyToOne
+    private CityInfo cityInfo;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adress")
+    private List<Person> persons;
 
     public Address() {
     }
 
     public Address(String street, String additionaInfo) {
         this.street = street;
-        this.additionaInfo = additionaInfo;
+        this.additionalInfo = additionaInfo;
     }
 
     public String getStreet() {
@@ -42,11 +56,11 @@ public class Address implements Serializable {
     }
 
     public String getAdditionaInfo() {
-        return additionaInfo;
+        return additionalInfo;
     }
 
     public void setAdditionaInfo(String additionaInfo) {
-        this.additionaInfo = additionaInfo;
+        this.additionalInfo = additionaInfo;
     }
 
     

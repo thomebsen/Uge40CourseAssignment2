@@ -5,11 +5,18 @@
  */
 package entity;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,10 +28,30 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer Person_ID;
     private String email;
     private String frirstName;
     private String lastName;
+    
+    @OneToMany(cascade = ALL, mappedBy = "person")
+    private List<Phone> phones = new ArrayList<>();
+    
+    @ManyToMany(cascade = ALL)
+    private List<Hobby> hobbies = new ArrayList<>();
+    
+    @ManyToOne(cascade = ALL)
+    private Address adress;
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void AddPhones(Phone phone) {
+        phones.add(phone);
+    }
+    
+    
+  
 
     public Person() {
     }
@@ -64,28 +91,28 @@ public class Person implements Serializable {
     
     
     public Integer getId() {
-        return id;
+        return Person_ID;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.Person_ID = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (Person_ID != null ? Person_ID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the Person_ID fields are not set
         if (!(object instanceof Person)) {
             return false;
         }
         Person other = (Person) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.Person_ID == null && other.Person_ID != null) || (this.Person_ID != null && !this.Person_ID.equals(other.Person_ID))) {
             return false;
         }
         return true;
@@ -93,7 +120,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Person[ id=" + id + " ]";
+        return "entity.Person[ id=" + Person_ID + " ]";
     }
     
 }

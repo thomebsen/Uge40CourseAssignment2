@@ -5,7 +5,6 @@
  */
 package facade;
 
-import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,11 +22,11 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public Person getPersonByPhone(String number) {
+    public PersonDTO getPersonByPhone(String number) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            Person person = em.find(Person.class, number); //Måske dette skal være PersonDTO..
+            PersonDTO person = em.find(PersonDTO.class, number); //Måske dette skal være PersonDTO..
             em.getTransaction().commit();
             return person;
         } finally {
@@ -37,12 +36,12 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public List<Person> getPersonWithHobby(String hobbyName) {
+    public List<PersonDTO> getPersonWithHobby(String hobbyName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Person> getAllPersonsByZip(int zipCode) {
+    public List<PersonDTO> getAllPersonsByZip(int zipCode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -52,7 +51,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public Person addPerson(Person person) {
+    public PersonDTO addPerson(PersonDTO person) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -66,7 +65,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public Person editPerson(Person person) {
+    public PersonDTO editPerson(PersonDTO person) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -80,7 +79,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public void deletePerson(Person person) {
+    public void deletePerson(PersonDTO person) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();

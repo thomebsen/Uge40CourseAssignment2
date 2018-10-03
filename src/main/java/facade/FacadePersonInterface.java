@@ -13,11 +13,11 @@ import java.util.List;
  * @author Oliver
  */
 public interface FacadePersonInterface {
-    public Person getPersonByPhone(String number);
-    public List<Person> getPersonWithHobby(String hobbyName);
-    public List<Person> getAllPersonsByZip(int zipCode);
+    public PersonDTO getPersonByPhone(String number);
+    public List<PersonDTO> getPersonWithHobby(String hobbyName);
+    public List<PersonDTO> getAllPersonsByZip(int zipCode);
     public int getNumberOfPersonWithHobby(String hobbyName);
-    public Person addPerson(Person person);
-    public Person editPerson(Person person);
-    public void deletePerson(Person person);
+    public PersonDTO addPerson(PersonDTO person);
+    public PersonDTO editPerson(PersonDTO person);
+    public void deletePerson(PersonDTO person);
 }

@@ -24,16 +24,6 @@ public class main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         FacadePerson fp = new FacadePerson(emf);
        
-        Person person = new Person();
-        Address address = new Address("Westside", "This is my homeboy jimmy D's address");
-
-        person.setFrirstName("Jajeet");
-        person.setLastName("Jones");
-        person.setEmail("test@test1.dk");
-        
-        person.setAdress(address);
-
-        fp.addPerson(person);
 
     }
 

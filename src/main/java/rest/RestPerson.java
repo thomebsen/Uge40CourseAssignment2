@@ -65,16 +65,9 @@ public class RestPerson {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createPerson() {
-        Person person = new Person();
-        Address address = new Address("", "");
-
-        person.setFrirstName("");
-        person.setLastName("");
-        person.setEmail("");
-        person.setAdress(address);
-        
-        String json = gson.toJson(fp.addPerson(person));
-        return Response.ok(json).build();
+    public Response createPerson(String json) {
+        Person p = gson.fromJson(json, Person.class);
+        fp.addPerson(p);
+        return Response.ok(p).build();
     }
 }

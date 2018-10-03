@@ -5,6 +5,7 @@
  */
 package rest;
 
+import entity.Address;
 import entity.Person;
 import entity.PersonDTO;
 import facade.FacadeCityInfo;
@@ -17,13 +18,8 @@ import javax.persistence.Persistence;
  * @author thoma
  */
 public class main {
+
     public static void main(String[] args) {
-        
-
-
-
-
-
 
         //Oliver tests:
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
@@ -40,5 +36,5 @@ public class main {
         
         
     }
-    
+
 }

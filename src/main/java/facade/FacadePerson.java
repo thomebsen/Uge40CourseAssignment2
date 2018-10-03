@@ -25,11 +25,12 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO getPersonByPhone(String number) {
+    public PersonDTO getPersonByPhone(int number) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            TypedQuery<PersonDTO> query = em.createQuery("SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p WHERE Phone.number =" + number, PersonDTO.class);
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.phones k WHERE k.number = :number" , PersonDTO.class);
+            query.setParameter("number", number);
             PersonDTO person = query.getSingleResult();
             em.getTransaction().commit();
             return person;

@@ -31,7 +31,7 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String email;
-    private String frirstName;
+    private String firstName;
     private String lastName;
     
    
@@ -53,7 +53,7 @@ public class Person implements Serializable {
 
     public Person(String email, String frirstName, String lastName) {
         this.email = email;
-        this.frirstName = frirstName;
+        this.firstName = frirstName;
         this.lastName = lastName;
     }
 
@@ -65,12 +65,12 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public String getFrirstName() {
-        return frirstName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFrirstName(String frirstName) {
-        this.frirstName = frirstName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

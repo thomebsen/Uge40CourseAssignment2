@@ -5,10 +5,12 @@
  */
 package facade;
 
+import entity.Person;
 import entity.PersonDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,7 +29,8 @@ public class FacadePerson implements FacadePersonInterface {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            PersonDTO person = em.find(PersonDTO.class, number); //Måske dette skal være PersonDTO..
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p WHERE Phone.number =" + number, PersonDTO.class);
+            PersonDTO person = query.getSingleResult();
             em.getTransaction().commit();
             return person;
         } finally {
@@ -52,7 +55,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO addPerson(PersonDTO person) {
+    public Person addPerson(Person person) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -80,7 +83,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public void deletePerson(PersonDTO person) {
+    public void deletePerson(Person person) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();

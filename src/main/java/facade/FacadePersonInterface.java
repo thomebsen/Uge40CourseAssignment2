@@ -18,7 +18,7 @@ public interface FacadePersonInterface {
     public List<PersonDTO> getPersonWithHobby(String hobbyName);
     public List<PersonDTO> getAllPersonsByZip(int zipCode);
     public int getNumberOfPersonWithHobby(String hobbyName);
-    public PersonDTO addPerson(PersonDTO person);
+    public Person addPerson(Person person);
     public PersonDTO editPerson(PersonDTO person);
-    public void deletePerson(PersonDTO person);
+    public void deletePerson(Person person);
 }

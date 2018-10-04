@@ -9,9 +9,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import entity.Address;
+import entity.CityInfo;
 import entity.Person;
 import entity.PersonDTO;
-import errorhandling.ParamaterNoMatchException;
+import errorhandling.*;
 import facade.FacadePerson;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,13 +31,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import jdk.nashorn.internal.parser.JSONParser;
 import facade.*;
+import java.util.List;
 
 /**
  * REST Web Service
  *
  * @author thoma
  */
-@Path("person")
+@Path("data")
 public class RestPerson {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -55,26 +57,67 @@ public class RestPerson {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
-        return gson.toJson("This is a restful API");
+        return "This is a restful API.";
     }
 
-    @Path("test/{testText}")
+    //tester
+    @Path("test/{hej}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String testPathParam(@PathParam("testText") String testText) {
-        return gson.toJson(testText);
+    public String testPathParam(@PathParam("hej") String hej) {
+        return gson.toJson(hej);
     }
 
-//
-//    @Path("getByPhoneNumber/{number}")
-//    @GET
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") String phoneNum) {
-//        Person p = gson.fromJson(json, Person.class);
-//        fp.getPersonByPhone(phoneNum);
-//        return Response.ok(json).build();
-//    }
+    @Path("getByPhoneNumber/{phoneNum}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") int phoneNum) {
+        Person p = gson.fromJson(json, Person.class);
+        try {
+            fp.getPersonByPhone(phoneNum);
+
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Person not found with PhoneNumber");
+        }
+        return Response.ok(json).build();
+    }
+
+    @Path("getPersonWithHobby/{hobbyName}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPersonWithHobby(String json, @PathParam("hobbyName") String hobbyName) throws PersonNotFoundException {
+        Person p = gson.fromJson(json, Person.class);
+        try {
+
+            fp.getPersonWithHobby(hobbyName);
+        } catch (Exception e) {
+            throw new PersonNotFoundException("person not found with this hobby");
+        }
+        return Response.ok(json).build();
+    }
+
+    @Path("getAllPersonsByZip/{zipCode}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllPersonsByZip(String json, @PathParam("zipCode") int zipCode) throws PersonNotFoundException, InternalException {
+        Person p = gson.fromJson(json, Person.class);
+        try {
+            List<CityInfo> allZips = fc.getAllZipCodes();
+            if (allZips.contains(zipCode)) {
+                fp.getAllPersonsByZip(zipCode);
+            } else {
+                throw new PersonNotFoundException("No persons found with this zipCode");
+
+            }
+        } catch (Exception e) {
+            throw new InternalException("No persons found with this zipCode");
+        }
+        return Response.ok(json).build();
+    }
+
     @Path("createPerson")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -89,6 +132,20 @@ public class RestPerson {
         }
         fp.addPerson(p);
         return Response.ok(json).build();
+    }
+
+    @Path("zipcodes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CityInfo> getAllCitys() {
+        return fc.getAllZipCodes();
+    }
+
+    @Path("cityinfo")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CityInfo> getAllCityInfo() {
+        return fc.getAllCityInfo();
     }
 
 }

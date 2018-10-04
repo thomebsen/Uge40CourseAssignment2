@@ -6,11 +6,12 @@
 package rest;
 
 import entity.Address;
+import entity.CityInfo;
 import entity.Person;
 import entity.PersonDTO;
 import facade.FacadeCityInfo;
 import facade.FacadePerson;
-import java.util.Scanner;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -29,14 +30,7 @@ public class main {
 
         //System.out.println("All zipCodes: " + fc.getAllZipCodes());
         System.out.println("Get by phone: " + fp.getPersonByPhone(12345678).getFirstName());
-
-        Scanner sc = new Scanner(System.in);
-        int i = sc.nextInt();
-        if (fc.getAllZipCodes().contains(i)) {
-            System.out.println(fc.getAllZipCodes());
-        } else {
-            System.out.println("Error");
-        }
+        System.out.println(fc.getAllZipCodes());
 
     }
 

@@ -72,7 +72,7 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") int phoneNum) {
+    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") String phoneNum) {
         Person p = gson.fromJson(json, Person.class);
         try {
             fp.getPersonByPhone(phoneNum);
@@ -102,7 +102,7 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllPersonsByZip(String json, @PathParam("zipCode") int zipCode) throws PersonNotFoundException, InternalException {
+    public Response getAllPersonsByZip(String json, @PathParam("zipCode") String zipCode) throws PersonNotFoundException, InternalException {
         Person p = gson.fromJson(json, Person.class);
         try {
             List<CityInfo> allZips = fc.getAllZipCodes();

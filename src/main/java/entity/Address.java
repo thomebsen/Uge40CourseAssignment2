@@ -63,6 +63,31 @@ public class Address implements Serializable {
         this.additionalInfo = additionaInfo;
     }
 
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void addPersons(Person person) {
+        persons.add(person);
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+    }
+
+    public CityInfo getCityInfo() {
+        return cityInfo;
+    }
+
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
+        cityInfo.addAddresse(this);
+    }
+
     
     
     

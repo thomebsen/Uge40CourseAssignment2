@@ -66,15 +66,15 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") int phoneNum) {
-        Person p = gson.fromJson(json, Person.class);
+    public Response getPersonByPhoneNumber(@PathParam("phoneNum") int phoneNum) {
+        PersonDTO p;
         try {
-            fp.getPersonByPhone(phoneNum);
-
+            p = fp.getPersonByPhone(phoneNum);
+            return Response.ok(gson.toJson(p, PersonDTO.class)).build();
         } catch (Exception e) {
             throw new PersonNotFoundException("Person not found with PhoneNumber");
         }
-        return Response.ok(json).build();
+
     }
 
     @Path("getPersonWithHobby/{hobbyName}")
@@ -102,9 +102,9 @@ public class RestPerson {
             List<CityInfo> allZips = fc.getAllZipCodes();
             if (allZips.contains(zipCode)) {
                 fp.getAllPersonsByZip(zipCode);
-            }else{
-            throw new PersonNotFoundException("No persons found with this zipCode");
-                
+            } else {
+                throw new PersonNotFoundException("No persons found with this zipCode");
+
             }
         } catch (Exception e) {
             throw new InternalException("No persons found with this zipCode");

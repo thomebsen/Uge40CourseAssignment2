@@ -93,6 +93,10 @@ public class FacadePerson implements FacadePersonInterface {
 
     @Override
     public Person addPerson(Person person) {
+     
+        
+        
+        
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();

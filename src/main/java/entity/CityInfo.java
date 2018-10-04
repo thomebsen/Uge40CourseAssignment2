@@ -25,18 +25,13 @@ public class CityInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private int zipCode;
+    private String zipCode;
     private String city;
-    
-    
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityInfo")
-    private List<Address> adresses = new ArrayList();
-    
-    
-    public CityInfo(int zipCode, String city) {
+    private List<Address> addresses = new ArrayList();
+
+    public CityInfo(String zipCode, String city) {
         this.zipCode = zipCode;
         this.city = city;
     }
@@ -44,11 +39,11 @@ public class CityInfo implements Serializable {
     public CityInfo() {
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
@@ -59,40 +54,13 @@ public class CityInfo implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
-    
-    
 
-    public Integer getId() {
-        return id;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void addAddresse(Address address) {
+        addresses.add(address);
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CityInfo)) {
-            return false;
-        }
-        CityInfo other = (CityInfo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entity.CityInfo[ id=" + id + " ]";
-    }
-    
 }

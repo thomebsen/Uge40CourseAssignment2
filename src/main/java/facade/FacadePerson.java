@@ -26,7 +26,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO getPersonByPhone(int number) {
+    public PersonDTO getPersonByPhone(String number) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();

@@ -72,11 +72,11 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") int phoneNum) {
-        Person p = gson.fromJson(json, Person.class);
+    public Response getPersonByPhoneNumber(@PathParam("phoneNum") String phoneNum) {
+        String json = "";
         try {
-            fp.getPersonByPhone(phoneNum);
-
+          PersonDTO p = fp.getPersonByPhone(phoneNum)  ;
+          json = gson.toJson(p, PersonDTO.class);
         } catch (Exception e) {
             throw new PersonNotFoundException("Person not found with PhoneNumber");
         }

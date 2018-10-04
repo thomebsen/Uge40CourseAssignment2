@@ -72,11 +72,11 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") int phoneNum) {
-        Person p = gson.fromJson(json, Person.class);
+    public Response getPersonByPhoneNumber( @PathParam("phoneNum") String phoneNum) {
+        String json="";
         try {
-            fp.getPersonByPhone(phoneNum);
-
+            PersonDTO p = fp.getPersonByPhone(phoneNum);
+            json= gson.toJson(p,PersonDTO.class);
         } catch (Exception e) {
             throw new PersonNotFoundException("Person not found with PhoneNumber");
         }
@@ -87,11 +87,13 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonWithHobby(String json, @PathParam("hobbyName") String hobbyName) throws PersonNotFoundException {
-        Person p = gson.fromJson(json, Person.class);
+    public Response getPersonWithHobby(@PathParam("hobbyName") String hobbyName) throws PersonNotFoundException {
+        
+        List<PersonDTO> persons = null;
+        String json = "";
         try {
-
-            fp.getPersonWithHobby(hobbyName);
+            persons = fp.getPersonWithHobby(hobbyName);
+            json = gson.toJson(persons, PersonDTO.class);
         } catch (Exception e) {
             throw new PersonNotFoundException("person not found with this hobby");
         }

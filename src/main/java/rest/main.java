@@ -28,25 +28,10 @@ public class main {
         FacadePerson fp = new FacadePerson(emf);
         FacadeCityInfo fc = new FacadeCityInfo(emf);
 
-        //System.out.println("All zipCodes: " + fc.getAllZipCodes());
-        
-        
-        System.out.println("Get by phone: " + fp.getPersonByPhone("12345678").getFirstName());
-        
-        
-        person3.addPhones(phone1);
-        
-        Hobby hobby = new Hobby("Gaming", "Game games, for fun games");
-        Hobby hobby2 = new Hobby("Gamingfsdfsdsfs", "Gamesfdsfds games, forsdfdssf fun sdfdsfgames");
-        Hobby hobby3 = new Hobby("rrrrrrr", "scription");
-        
-        hobby3.addPersons(person3);
-       
-        em.getTransaction().begin();
-        em.persist(hobby3);
-        em.getTransaction().commit();
-
-      //  System.out.println(person.getHobbies().size());
+        System.out.println("All zipCodes: " + fc.getAllZipCodes());
+        //System.out.println(fp.getPersonWithHobby("Fodbold"));
+        //System.out.println(fp.getAllPersonsByZip("2800"));
+        //System.out.println(fp.getNumberOfPersonWithHobby("Fodbold"));
 
     }
 

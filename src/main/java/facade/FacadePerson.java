@@ -63,7 +63,7 @@ public class FacadePerson implements FacadePersonInterface {
         List<PersonDTO> persons = null;
         try {
             em.getTransaction().begin();
-            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.address k WHERE k.cityInfo.zipCode = :zipCOde", PersonDTO.class);
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.address k WHERE k.cityInfo.zipCode = :zipCode", PersonDTO.class);
             query.setParameter("zipCode", zipCode);
             persons = query.getResultList();
             em.getTransaction().commit();
@@ -81,6 +81,7 @@ public class FacadePerson implements FacadePersonInterface {
         try {
             em.getTransaction().begin();
             TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.hobbies k WHERE k.hobbyName = :hobbyName", PersonDTO.class);
+            query.setParameter("hobbyName", hobbyName);
             persons = query.getResultList();
             em.getTransaction().commit();
             for (int i = 0; i < persons.size(); i++) {

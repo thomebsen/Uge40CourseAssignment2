@@ -5,12 +5,11 @@
  */
 package entity;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import static javax.persistence.CascadeType.ALL;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+import static org.eclipse.persistence.expressions.ExpressionOperator.Length;
 
 /**
  *
@@ -31,30 +32,33 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String email;
-    private String frirstName;
+    private String firstName;
     private String lastName;
-    
-   
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<Phone> phones = new ArrayList();
-   
+
     @ManyToOne
     private Address address;
-    
-    
-   @ManyToMany(cascade = CascadeType.ALL, mappedBy = "persons")
-   private List<Hobby> hobbies = new ArrayList();
-    
-    
-    
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "persons")
+    private List<Hobby> hobbies = new ArrayList();
 
     public Person() {
     }
 
     public Person(String email, String frirstName, String lastName) {
         this.email = email;
-        this.frirstName = frirstName;
+        this.firstName = frirstName;
         this.lastName = lastName;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
     }
 
     public String getEmail() {
@@ -66,11 +70,11 @@ public class Person implements Serializable {
     }
 
     public String getFrirstName() {
-        return frirstName;
+        return firstName;
     }
 
     public void setFrirstName(String frirstName) {
-        this.frirstName = frirstName;
+        this.firstName = frirstName;
     }
 
     public String getLastName() {
@@ -80,11 +84,7 @@ public class Person implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
-    
-    
-    
-    
+
     public Integer getId() {
         return id;
     }
@@ -117,5 +117,5 @@ public class Person implements Serializable {
     public String toString() {
         return "entity.Person[ id=" + id + " ]";
     }
-    
+
 }

@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rest;
-
-import javax.persistence.Persistence;
+package entity;
 
 /**
  *
  * @author thoma
  */
-public class SchemaBuilder {
-    public static void main(String[] args) {
-        Persistence.generateSchema("pu", null);
-    }
-    
+public interface JsonMessage<T> {
+    public T toInternal();
 }
-

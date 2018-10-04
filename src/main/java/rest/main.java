@@ -23,6 +23,8 @@ public class main {
         //Oliver tests:
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         FacadePerson fp = new FacadePerson(emf);
+        
+        Person p = new Person("asdsa@gmail.com", "bobb", "jonn");
        
 
     }

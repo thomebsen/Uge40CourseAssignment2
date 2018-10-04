@@ -11,6 +11,8 @@ import com.google.gson.JsonParser;
 import entity.Address;
 import entity.Person;
 import entity.PersonDTO;
+import errorhandling.ParameterNoMatchException;
+import errorhandling.PersonNotFoundException;
 import facade.FacadePerson;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -56,19 +58,29 @@ public class RestPerson {
         return gson.toJson("This is a restful API");
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_XML)
-    public void putXml(String content) {
-        
+    @Path("getByPhoneNumber/{number}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") String phoneNum) {
+        Person p = gson.fromJson(json, Person.class);
+        fp.getPersonByPhone(phoneNum);
+        return Response.ok(json).build();
     }
 
     @Path("createPerson")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createPerson(String json) {
+    public Response createPerson(String json) throws ParameterNoMatchException {
         Person p = gson.fromJson(json, Person.class);
+
+        if (p.getFrirstName() == null || p.getLastName() == null || p.getEmail() == null) {
+            throw new ParameterNoMatchException("Please enter a valid firstname, lastname or email.s");
+        } else if ((p.getFrirstName().length() <= 1) || (p.getLastName().length() <= 1)) {
+            throw new ParameterNoMatchException("Your firstname and lastname must be at least 2 characters long.");
+        }
         fp.addPerson(p);
-        return Response.ok(p).build();
+        return Response.ok(json).build();
     }
 }

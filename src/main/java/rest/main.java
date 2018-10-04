@@ -6,10 +6,12 @@
 package rest;
 
 import entity.Address;
+import entity.CityInfo;
 import entity.Person;
 import entity.PersonDTO;
 import facade.FacadeCityInfo;
 import facade.FacadePerson;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -25,16 +27,27 @@ public class main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         FacadePerson fp = new FacadePerson(emf);
         FacadeCityInfo fc = new FacadeCityInfo(emf);
-        
+
         //System.out.println("All zipCodes: " + fc.getAllZipCodes());
         
         
         System.out.println("Get by phone: " + fp.getPersonByPhone("12345678").getFirstName());
         
         
+        person3.addPhones(phone1);
         
+        Hobby hobby = new Hobby("Gaming", "Game games, for fun games");
+        Hobby hobby2 = new Hobby("Gamingfsdfsdsfs", "Gamesfdsfds games, forsdfdssf fun sdfdsfgames");
+        Hobby hobby3 = new Hobby("rrrrrrr", "scription");
         
-        
+        hobby3.addPersons(person3);
+       
+        em.getTransaction().begin();
+        em.persist(hobby3);
+        em.getTransaction().commit();
+
+      //  System.out.println(person.getHobbies().size());
+
     }
 
 }

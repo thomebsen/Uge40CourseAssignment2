@@ -7,6 +7,7 @@ package facade;
 
 import entity.Person;
 import entity.PersonDTO;
+import errorhandling.PersonNotFoundException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,7 +38,7 @@ public class FacadePerson implements FacadePersonInterface {
         } finally {
             em.close();
         }
-        
+
     }
 
     @Override
@@ -51,7 +52,6 @@ public class FacadePerson implements FacadePersonInterface {
             persons = query.getResultList();
             em.getTransaction().commit();
             return persons;
-            
         } finally {
             em.close();
         }
@@ -85,7 +85,7 @@ public class FacadePerson implements FacadePersonInterface {
             em.getTransaction().commit();
             for (int i = 0; i < persons.size(); i++) {
                 personCount++;
-                
+
             }
             return personCount;
         } finally {
@@ -95,12 +95,20 @@ public class FacadePerson implements FacadePersonInterface {
 
     @Override
     public Person addPerson(Person person) {
+     
+        
+        
+        
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(person);
             em.getTransaction().commit();
-        } finally {
+        } 
+        catch (Exception e) {
+            throw new PersonNotFoundException("Person not found.");
+        } 
+        finally {
             em.close();
         }
 
@@ -128,6 +136,9 @@ public class FacadePerson implements FacadePersonInterface {
             em.getTransaction().begin();
             em.remove(person);
             em.getTransaction().commit();
+
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Person not found");
         } finally {
             em.close();
         }

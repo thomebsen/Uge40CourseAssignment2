@@ -33,20 +33,15 @@ public class Person implements Serializable {
     private String email;
     private String firstName;
     private String lastName;
-    
-   
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<Phone> phones = new ArrayList();
-   
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
-    
-    
-   @ManyToMany(cascade = CascadeType.ALL, mappedBy = "persons")
-   private List<Hobby> hobbies = new ArrayList();
-    
-    
-    
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Hobby> hobbies = new ArrayList();
 
     public Person() {
     }
@@ -55,6 +50,15 @@ public class Person implements Serializable {
         this.email = email;
         this.firstName = frirstName;
         this.lastName = lastName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+        address.addPersons(this);
     }
 
     public String getEmail() {
@@ -80,11 +84,26 @@ public class Person implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
-    
-    
-    
-    
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void addPhones(Phone phone) {
+        phones.add(phone);
+        phone.setPerson(this);
+    }
+
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void addHobbies(Hobby hobby) {
+
+        hobbies.add(hobby);
+        hobby.addPersons(this);
+    }
+
     public Integer getId() {
         return id;
     }
@@ -117,5 +136,5 @@ public class Person implements Serializable {
     public String toString() {
         return "entity.Person[ id=" + id + " ]";
     }
-    
+
 }

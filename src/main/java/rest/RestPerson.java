@@ -56,16 +56,16 @@ public class RestPerson {
     public String getJson() {
         return gson.toJson("This is a restful API");
     }
-//
-//    @Path("getByPhoneNumber/{number}")
-//    @GET
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") String phoneNum) {
-//        Person p = gson.fromJson(json, Person.class);
-//        fp.getPersonByPhone(phoneNum);
-//        return Response.ok(json).build();
-//    }
+
+    @Path("getByPhoneNumber/{number}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") int phoneNum) {
+        Person p = gson.fromJson(json, Person.class);
+        fp.getPersonByPhone(phoneNum);
+        return Response.ok(json).build();
+    }
 
     @Path("createPerson")
     @POST

@@ -9,10 +9,10 @@ package errorhandling;
  *
  * @author thoma
  */
-public class InternalException extends RuntimeException{
+public class ParamaterNoMatchException extends RuntimeException{
     private String message;
 
-    public InternalException(String message) {
+    public ParamaterNoMatchException(String message) {
         this.message = message;
     }
 

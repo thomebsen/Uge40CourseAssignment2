@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package errorhandling;
+package ErrorHandling;
 
 /**
  *
- * @author thoma
+ * @author DD
  */
 public class PersonNotFoundException extends RuntimeException {
+
     private String message;
 
     public PersonNotFoundException(String message) {

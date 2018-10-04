@@ -8,6 +8,10 @@ package errorhandling;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/**
+ *
+ * @author thoma
+ */
 public class ErrorMessage {
     private int code;
     private String message;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package errorhandling;
+package ErrorHandling;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,21 +16,22 @@ import javax.ws.rs.ext.Provider;
 
 /**
  *
- * @author thoma
+ * @author jonas
  */
 @Provider
-public class ParameterNoMatchExceptionMapper implements ExceptionMapper<ParameterNoMatchException>{
-         static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+public class PersonNotFoundExceptionMapper implements ExceptionMapper<PersonNotFoundException> {
+     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     @Context
     ServletContext context;
 
     @Override
-    public Response toResponse(ParameterNoMatchException ex) {
+    public Response toResponse(PersonNotFoundException ex) {
         boolean isDebug = context.getInitParameter("debug").equals("true");
-        ErrorMessage err = new ErrorMessage(ex, 400, isDebug);
-        err.setDescription("You entered a wrong parameter...");
-        return Response.status(400)
+        ErrorMessage err = new ErrorMessage(ex, 404, isDebug);
+        err.setDescription("You tried to call... ");
+        return Response.status(404)
                 .entity(gson.toJson(err))
                 .type(MediaType.APPLICATION_JSON).build();
     }
+
 }

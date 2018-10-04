@@ -8,6 +8,7 @@ package rest;
 import entity.Address;
 import entity.Person;
 import entity.PersonDTO;
+import facade.FacadeCityInfo;
 import facade.FacadePerson;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -23,10 +24,17 @@ public class main {
         //Oliver tests:
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         FacadePerson fp = new FacadePerson(emf);
+        FacadeCityInfo fc = new FacadeCityInfo(emf);
         
-        Person p = new Person("asdsa@gmail.com", "bobb", "jonn");
-       
-
+        //System.out.println("All zipCodes: " + fc.getAllZipCodes());
+        
+        
+        System.out.println("Get by phone: " + fp.getPersonByPhone(12345678).getFirstName());
+        
+        
+        
+        
+        
     }
 
 }

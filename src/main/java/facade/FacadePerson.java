@@ -7,7 +7,7 @@ package facade;
 
 import entity.Person;
 import entity.PersonDTO;
-import errorhandling.ParameterNoMatchException;
+import errorhandling.PersonNotFoundException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -26,18 +26,19 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO getPersonByPhone(String number) {
+    public PersonDTO getPersonByPhone(int number) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            TypedQuery<PersonDTO> query = em.createQuery("SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p WHERE Phone.number =" + number, PersonDTO.class);
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.phones k WHERE k.number = :number" , PersonDTO.class);
+            query.setParameter("number", number);
             PersonDTO person = query.getSingleResult();
             em.getTransaction().commit();
             return person;
         } finally {
             em.close();
         }
-        
+
     }
 
     @Override
@@ -50,7 +51,6 @@ public class FacadePerson implements FacadePersonInterface {
             persons = query.getResultList();
             em.getTransaction().commit();
             return persons;
-            
         } finally {
             em.close();
         }
@@ -83,7 +83,7 @@ public class FacadePerson implements FacadePersonInterface {
             em.getTransaction().commit();
             for (int i = 0; i < persons.size(); i++) {
                 personCount++;
-                
+
             }
             return personCount;
         } finally {
@@ -98,7 +98,11 @@ public class FacadePerson implements FacadePersonInterface {
             em.getTransaction().begin();
             em.persist(person);
             em.getTransaction().commit();
-        } finally {
+        } 
+        catch (Exception e) {
+            throw new PersonNotFoundException("Person not found.");
+        } 
+        finally {
             em.close();
         }
 
@@ -126,6 +130,9 @@ public class FacadePerson implements FacadePersonInterface {
             em.getTransaction().begin();
             em.remove(person);
             em.getTransaction().commit();
+
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Person not found");
         } finally {
             em.close();
         }

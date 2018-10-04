@@ -30,7 +30,24 @@ public class FacadeCityInfo implements FacadeCityInfoInterface {
         List<CityInfo> zipCodes = null;
         try {
             em.getTransaction().begin();
+            //SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p WHERE CityInfo.zipCode =" + zipCode, PersonDTO.class)
             TypedQuery query = em.createQuery("SELECT z.zipCode From CityInfo z", CityInfo.class);
+            zipCodes = query.getResultList();
+            em.getTransaction().commit();
+            return zipCodes;
+        } finally {
+            em.close();
+        }
+    }
+    
+
+    public List<CityInfo> getAllCityInfo() {
+        EntityManager em = emf.createEntityManager();
+        List<CityInfo> zipCodes = null;
+        try {
+            em.getTransaction().begin();
+            //SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p WHERE CityInfo.zipCode =" + zipCode, PersonDTO.class)
+            TypedQuery query = em.createQuery("SELECT z.id, z.city, z.zipCode  From CityInfo z", CityInfo.class);
             zipCodes = query.getResultList();
             em.getTransaction().commit();
             return zipCodes;

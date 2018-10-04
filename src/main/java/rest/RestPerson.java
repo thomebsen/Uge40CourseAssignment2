@@ -44,6 +44,7 @@ public class RestPerson {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
     FacadePerson fp = new FacadePerson(emf);
+    FacadeCityInfo fc = new FacadeCityInfo(emf);
 
     @Context
     private UriInfo context;
@@ -56,6 +57,14 @@ public class RestPerson {
     public String getJson() {
         return gson.toJson("This is a restful API");
     }
+
+    @Path("test/{testText}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String testPathParam(@PathParam("testText") String testText) {
+        return gson.toJson(testText);
+    }
+
 //
 //    @Path("getByPhoneNumber/{number}")
 //    @GET
@@ -66,7 +75,6 @@ public class RestPerson {
 //        fp.getPersonByPhone(phoneNum);
 //        return Response.ok(json).build();
 //    }
-
     @Path("createPerson")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -74,7 +82,7 @@ public class RestPerson {
     public Response createPerson(String json) throws ParamaterNoMatchException {
         Person p = gson.fromJson(json, Person.class);
 
-        if (p.getFirstName()== null || p.getLastName() == null || p.getEmail() == null) {
+        if (p.getFirstName() == null || p.getLastName() == null || p.getEmail() == null) {
             throw new ParamaterNoMatchException("Please enter a valid firstname, lastname or email.s");
         } else if ((p.getFirstName().length() <= 1) || (p.getLastName().length() <= 1)) {
             throw new ParamaterNoMatchException("Your firstname and lastname must be at least 2 characters long.");
@@ -82,4 +90,5 @@ public class RestPerson {
         fp.addPerson(p);
         return Response.ok(json).build();
     }
+
 }

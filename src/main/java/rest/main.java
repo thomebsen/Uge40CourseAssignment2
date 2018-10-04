@@ -6,10 +6,12 @@
 package rest;
 
 import entity.Address;
+import entity.CityInfo;
 import entity.Person;
 import entity.PersonDTO;
 import facade.FacadeCityInfo;
 import facade.FacadePerson;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -27,9 +29,13 @@ public class main {
         FacadeCityInfo fc = new FacadeCityInfo(emf);
         
         //System.out.println("All zipCodes: " + fc.getAllZipCodes());
-        
-        
-        System.out.println("Get by phone: " + fp.getPersonByPhone(12345678).getFirstName());
+        int kage = 2620;
+        List<CityInfo> allZips = fc.getAllZipCodes();
+         if (allZips.contains(kage)) {
+                System.out.println("sup");
+            }else{
+             System.out.println("no ;_;");
+            }
         
         
         

@@ -38,7 +38,7 @@ import java.util.List;
  *
  * @author thoma
  */
-@Path("person")
+@Path("data")
 public class RestPerson {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -54,11 +54,17 @@ public class RestPerson {
     public RestPerson() {
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getJson() {
+        return "This is a restful API.";
+    }
+
     //tester
     @Path("test/{hej}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@PathParam("hej") String hej) {
+    public String testPathParam(@PathParam("hej") String hej) {
         return gson.toJson(hej);
     }
 
@@ -66,15 +72,15 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonByPhoneNumber(@PathParam("phoneNum") int phoneNum) {
-        PersonDTO p;
+    public Response getPersonByPhoneNumber(String json, @PathParam("phoneNum") int phoneNum) {
+        Person p = gson.fromJson(json, Person.class);
         try {
-            p = fp.getPersonByPhone(phoneNum);
-            return Response.ok(gson.toJson(p, PersonDTO.class)).build();
+            fp.getPersonByPhone(phoneNum);
+
         } catch (Exception e) {
             throw new PersonNotFoundException("Person not found with PhoneNumber");
         }
-
+        return Response.ok(json).build();
     }
 
     @Path("getPersonWithHobby/{hobbyName}")
@@ -127,4 +133,19 @@ public class RestPerson {
         fp.addPerson(p);
         return Response.ok(json).build();
     }
+
+    @Path("zipcodes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CityInfo> getAllCitys() {
+        return fc.getAllZipCodes();
+    }
+
+    @Path("cityinfo")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CityInfo> getAllCityInfo() {
+        return fc.getAllCityInfo();
+    }
+
 }

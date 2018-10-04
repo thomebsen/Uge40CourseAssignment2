@@ -27,20 +27,11 @@ public class main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         FacadePerson fp = new FacadePerson(emf);
         FacadeCityInfo fc = new FacadeCityInfo(emf);
-        
+
         //System.out.println("All zipCodes: " + fc.getAllZipCodes());
-        int kage = 2620;
-        List<CityInfo> allZips = fc.getAllZipCodes();
-         if (allZips.contains(kage)) {
-                System.out.println("sup");
-            }else{
-             System.out.println("no ;_;");
-            }
-        
-        
-        
-        
-        
+        System.out.println("Get by phone: " + fp.getPersonByPhone(12345678).getFirstName());
+        System.out.println(fc.getAllZipCodes());
+
     }
 
 }

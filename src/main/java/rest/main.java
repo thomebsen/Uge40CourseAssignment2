@@ -29,7 +29,7 @@ public class main {
         //System.out.println("All zipCodes: " + fc.getAllZipCodes());
         
         
-        System.out.println("Get by phone: " + fp.getPersonByPhone(12345678).getFirstName());
+        System.out.println("Get by phone: " + fp.getPersonByPhone("12345678").getFirstName());
         
         
         

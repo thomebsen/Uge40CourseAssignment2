@@ -25,7 +25,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO getPersonByPhone(int number) {
+    public PersonDTO getPersonByPhone(String number) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -46,7 +46,8 @@ public class FacadePerson implements FacadePersonInterface {
         List<PersonDTO> persons = null;
         try {
             em.getTransaction().begin();
-            TypedQuery<PersonDTO> query = em.createQuery("SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Hobby.hobbyName =" + hobbyName, PersonDTO.class);
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.hobbies k WHERE k.hobbyName = :hobbyName", PersonDTO.class);
+            query.setParameter("hobbyName", hobbyName);
             persons = query.getResultList();
             em.getTransaction().commit();
             return persons;
@@ -57,12 +58,13 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public List<PersonDTO> getAllPersonsByZip(int zipCode) {
+    public List<PersonDTO> getAllPersonsByZip(String zipCode) {
         EntityManager em = emf.createEntityManager();
         List<PersonDTO> persons = null;
         try {
             em.getTransaction().begin();
-            TypedQuery<PersonDTO> query = em.createQuery("SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p WHERE CityInfo.zipCode =" + zipCode, PersonDTO.class);
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.address k WHERE k.cityInfo.zipCode = :zipCOde", PersonDTO.class);
+            query.setParameter("zipCode", zipCode);
             persons = query.getResultList();
             em.getTransaction().commit();
             return persons;
@@ -78,7 +80,7 @@ public class FacadePerson implements FacadePersonInterface {
         List<PersonDTO> persons = null;
         try {
             em.getTransaction().begin();
-            TypedQuery<PersonDTO> query = em.createQuery("SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Hobby.hobbyName =" + hobbyName, PersonDTO.class);
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.hobbies k WHERE k.hobbyName = :hobbyName", PersonDTO.class);
             persons = query.getResultList();
             em.getTransaction().commit();
             for (int i = 0; i < persons.size(); i++) {

@@ -30,7 +30,7 @@ public class FacadePerson implements FacadePersonInterface {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.phones k WHERE k.number = :number" , PersonDTO.class);
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email, p.address.street, p.address.cityInfo.city, p.address.cityInfo.zipCode) FROM Person p JOIN p.phones k WHERE k.number = :number" , PersonDTO.class);
             query.setParameter("number", number);
             PersonDTO person = query.getSingleResult();
             em.getTransaction().commit();

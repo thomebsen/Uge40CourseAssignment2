@@ -18,6 +18,13 @@ public class PersonDTO {
     private String lastName;
     private String email;
     
+    //Address
+    private String street;
+    private String city;
+    
+    //CityInfo
+    private String zipCode;
+    
 
     public PersonDTO() {
         
@@ -27,6 +34,39 @@ public class PersonDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public PersonDTO(String firstName, String lastName, String email, String street, String city, String zipCode) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.street = street;
+        this.city = city;
+        this.zipCode = zipCode;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
     
     public String getFirstName() {
@@ -51,6 +91,11 @@ public class PersonDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" + "firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", street=" + street + ", city=" + city + ", zipCode=" + zipCode + '}';
     }
     
 }

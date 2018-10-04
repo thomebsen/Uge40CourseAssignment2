@@ -28,10 +28,12 @@ public class main {
         FacadePerson fp = new FacadePerson(emf);
         FacadeCityInfo fc = new FacadeCityInfo(emf);
 
-        System.out.println("All zipCodes: " + fc.getAllZipCodes());
+        //System.out.println("All zipCodes: " + fc.getAllZipCodes());
         //System.out.println(fp.getPersonWithHobby("Fodbold"));
         //System.out.println(fp.getAllPersonsByZip("2800"));
         //System.out.println(fp.getNumberOfPersonWithHobby("Fodbold"));
+        
+        System.out.println(fp.getPersonByPhone("12345678"));
 
     }
 

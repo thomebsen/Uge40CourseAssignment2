@@ -14,7 +14,7 @@ import java.util.List;
  * @author Oliver
  */
 public interface FacadePersonInterface {
-    public PersonDTO getPersonByPhone(String number);
+    public PersonDTO getPersonByPhone(int number);
     public List<PersonDTO> getPersonWithHobby(String hobbyName);
     public List<PersonDTO> getAllPersonsByZip(int zipCode);
     public int getNumberOfPersonWithHobby(String hobbyName);

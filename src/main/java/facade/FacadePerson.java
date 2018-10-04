@@ -24,7 +24,23 @@ public class FacadePerson implements FacadePersonInterface {
     public FacadePerson(EntityManagerFactory emf) {
         this.emf = emf;
     }
-
+    
+    @Override
+    public PersonDTO getPersonHobbies(Integer id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email, p.address.street, p.address.cityInfo.city, p.address.cityInfo.zipCode, h.hobbyName) FROM Person p JOIN p.hobbies h WHERE p.id = :id", PersonDTO.class);
+            query.setParameter("id", id);
+            PersonDTO person = query.getSingleResult();
+            em.getTransaction().commit();
+            System.out.println("personHobby: " + person.getHobbies());
+            return person;
+        } finally {
+            em.close();
+        }
+    }
+    
     @Override
     public PersonDTO getPersonByPhone(String number) {
         EntityManager em = emf.createEntityManager();
@@ -32,6 +48,7 @@ public class FacadePerson implements FacadePersonInterface {
             em.getTransaction().begin();
             TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email, p.address.street, p.address.cityInfo.city, p.address.cityInfo.zipCode) FROM Person p JOIN p.phones k WHERE k.number = :number" , PersonDTO.class);
             query.setParameter("number", number);
+            System.out.println("fjdlkf");
             PersonDTO person = query.getSingleResult();
             em.getTransaction().commit();
             return person;

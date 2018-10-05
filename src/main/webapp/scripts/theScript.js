@@ -64,7 +64,7 @@ function getAllZipAndCity() {
 
 function getUserByPhoneNumber() {
     var id = document.getElementById("idInput").value;
-    fetch("http://localhost:8084/Uge40CourseAssignment2/api/data/person/" + id)
+    fetch("http://localhost:8084/Uge40CourseAssignment2/api/data/person/phone/" + id)
             .then(response => {
                 if (!response.ok) {
                     throw response;

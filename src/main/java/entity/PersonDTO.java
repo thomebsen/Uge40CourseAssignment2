@@ -38,23 +38,15 @@ public class PersonDTO {
         
     }
     
-    public PersonDTO(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public PersonDTO(Person person) {
+        this.firstName = person.getFirstName();
+        this.lastName = person.getLastName();
+        this.email = person.getEmail();
+        this.street = person.getAddress().getStreet();
+        this.city = person.getAddress().getCityInfo().getCity();
+        this.zipCode = person.getAddress().getCityInfo().getZipCode();
+        this.hobby = person.getHobbies().toString();
     }
-
-    public PersonDTO(String firstName, String lastName, String email, String street, String city, String zipCode, String hobby) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.street = street;
-        this.city = city;
-        this.zipCode = zipCode;
-        this.hobby = hobby;
-    }
-    
-    
 
     public PersonDTO(String firstName, String lastName, String email, String street, String city, String zipCode) {
         this.firstName = firstName;
@@ -65,19 +57,19 @@ public class PersonDTO {
         this.zipCode = zipCode;
     }
 
-    public PersonDTO(String firstName, String lastName, String email, String street, String city, String zipCode, List<Hobby> hobbies) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.street = street;
-        this.city = city;
-        this.zipCode = zipCode;
+//    public PersonDTO(String firstName, String lastName, String email, String street, String city, String zipCode, List<Hobby> hobbies) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.street = street;
+//        this.city = city;
+//        this.zipCode = zipCode;
         //this.hobbies = hobbies;
 //        for(Hobby hobby: hobbies) {
 //            this.hobbies += hobby.getHobbyName() + ", ";
 //        }
         
-    }
+//    }
 
     public List<Phone> getPhones() {
         return phones;

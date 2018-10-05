@@ -46,9 +46,9 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String email, String frirstName, String lastName) {
+    public Person(String email, String firstName, String lastName) {
         this.email = email;
-        this.firstName = frirstName;
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 
@@ -101,7 +101,7 @@ public class Person implements Serializable {
     public void addHobbies(Hobby hobby) {
 
         hobbies.add(hobby);
-        hobby.addPersons(this);
+        //hobby.addPersons(this);
     }
 
     public Integer getId() {
@@ -134,7 +134,9 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Person[ id=" + id + " ]";
+        return "Person{" + "id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + '}';
     }
+
+    
 
 }

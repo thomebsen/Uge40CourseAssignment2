@@ -21,4 +21,5 @@ public interface FacadePersonInterface {
     public Person addPerson(Person person);
     public PersonDTO editPerson(PersonDTO person, String newName);
     public void deletePerson(Person person);
+    public PersonDTO getPersonHobbies(Integer id);
 }

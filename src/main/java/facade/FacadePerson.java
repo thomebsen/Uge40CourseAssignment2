@@ -43,6 +43,22 @@ public class FacadePerson implements FacadePersonInterface {
     }
     
     @Override
+    public PersonDTO getPersonById(Integer id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p) FROM Person p WHERE p.id = :id", PersonDTO.class);
+            query.setParameter("id", id);
+            PersonDTO person = query.getSingleResult();
+            em.getTransaction().commit();
+            return person;
+            
+        } finally {
+            em.close();
+        }
+    }
+    
+    @Override
     public PersonDTO getPersonByPhone(String number) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -64,7 +80,7 @@ public class FacadePerson implements FacadePersonInterface {
         List<PersonDTO> persons = null;
         try {
             em.getTransaction().begin();
-            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.hobbies k WHERE k.hobbyName = :hobbyName", PersonDTO.class);
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p) FROM Person p JOIN p.hobbies k WHERE k.hobbyName = :hobbyName", PersonDTO.class);
             query.setParameter("hobbyName", hobbyName);
             persons = query.getResultList();
             em.getTransaction().commit();
@@ -97,7 +113,7 @@ public class FacadePerson implements FacadePersonInterface {
         List<PersonDTO> persons = null;
         try {
             em.getTransaction().begin();
-            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.hobbies k WHERE k.hobbyName = :hobbyName", PersonDTO.class);
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p) FROM Person p JOIN p.hobbies k WHERE k.hobbyName = :hobbyName", PersonDTO.class);
             query.setParameter("hobbyName", hobbyName);
             persons = query.getResultList();
             em.getTransaction().commit();

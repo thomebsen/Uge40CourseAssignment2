@@ -66,7 +66,7 @@ public class FacadePerson implements FacadePersonInterface {
             TypedQuery<PersonDTO> query = em.createQuery("SELECT new entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p JOIN p.address k WHERE k.cityInfo.zipCode = :zipCode", PersonDTO.class);
             query.setParameter("zipCode", zipCode);
             persons = query.getResultList();
-            em.getTransaction().commit();
+            em.getTransaction().commit();   
             return persons;
         } finally {
             em.close();
@@ -96,10 +96,6 @@ public class FacadePerson implements FacadePersonInterface {
 
     @Override
     public Person addPerson(Person person) {
-     
-        
-        
-        
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -117,8 +113,11 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO editPerson(PersonDTO person) {
+    public PersonDTO editPerson(PersonDTO person, String newName) {
         EntityManager em = emf.createEntityManager();
+        
+        person.setFirstName(newName);
+        
         try {
             em.getTransaction().begin();
             em.merge(person);

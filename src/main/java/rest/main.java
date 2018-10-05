@@ -27,23 +27,9 @@ public class main {
     public static void main(String[] args) {
 
         //Oliver tests:
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("putest");
         EntityManager em = emf.createEntityManager();
-        FacadePerson fp = new FacadePerson(emf);
-
-        Person p = new Person("Jonas@Hegn.dk", "Jonas", "Hegn");
-        Person p2 = new Person("Jens2@Hansen", "Jens", "Hansen");
-        Hobby h = new Hobby("Maler", "Hamler hegn");
-        Address a = new Address("MorbærHaveb", "HejmHejm");
-        CityInfo ci = new CityInfo("2620", "Albertslund");
-        a.setCityInfo(ci);
         
-        p2.setAddress(a);
-        
-        p2.addHobbies(h);
-        em.getTransaction().begin();
-        em.merge(p2);
-        em.getTransaction().commit();
         
     }
 }

@@ -84,7 +84,7 @@ public class RestPerson {
             throw new PersonNotFoundException("person not found with this hobby");
         }
     }
-    
+
     @Path("person/{phoneNum}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -92,7 +92,7 @@ public class RestPerson {
     public PersonDTO getPersonByPhone(@PathParam("phoneNum") String phoneNum) {
         return fp.getPersonByPhone(phoneNum);
     }
-
+    
     @Path("getAllPersonsByZip/{zipCode}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -139,10 +139,6 @@ public class RestPerson {
 //      //  fp.
 //       // fp.editPerson(person, newName);
 //    }
-
-    
-    
-    
     
     
     @Path("zipcodes")

@@ -16,7 +16,7 @@ import java.util.List;
 public interface FacadePersonInterface {
     public PersonDTO getPersonByPhone(String number);
     public List<PersonDTO> getPersonWithHobby(String hobbyName);
-    public List<PersonDTO> getAllPersonsByZip(int zipCode);
+    public List<PersonDTO> getAllPersonsByZip(String zipCode);
     public int getNumberOfPersonWithHobby(String hobbyName);
     public Person addPerson(Person person);
     public PersonDTO editPerson(PersonDTO person);

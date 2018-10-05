@@ -7,6 +7,7 @@ package rest;
 
 import entity.Address;
 import entity.CityInfo;
+import entity.Hobby;
 import entity.Person;
 import entity.PersonDTO;
 import entity.Phone;
@@ -30,24 +31,19 @@ public class main {
         EntityManager em = emf.createEntityManager();
         FacadePerson fp = new FacadePerson(emf);
 
+        Person p = new Person("Jonas@Hegn.dk", "Jonas", "Hegn");
+        Person p2 = new Person("Jens2@Hansen", "Jens", "Hansen");
+        Hobby h = new Hobby("Maler", "Hamler hegn");
+        Address a = new Address("MorbærHaveb", "HejmHejm");
+        CityInfo ci = new CityInfo("2620", "Albertslund");
+        a.setCityInfo(ci);
         
-        Person p = new Person("Andreas@Gmail.com", "Andreas", "Jørgensen");
-        Phone phone = new Phone("42676936", "Mobil");
+        p2.setAddress(a);
         
-        
-        p.addPhones(phone);
-        
+        p2.addHobbies(h);
         em.getTransaction().begin();
-        em.persist(p);
-        
+        em.merge(p2);
         em.getTransaction().commit();
         
-        
-        fp.getPersonByPhone("42676936");
-
-        
-        
-        
-
     }
 }

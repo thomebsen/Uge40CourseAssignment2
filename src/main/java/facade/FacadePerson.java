@@ -59,7 +59,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
     
     @Override
-    public PersonDTO getPersonByPhone(String number) {
+    public PersonDTO getPersonByPhone(String number) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();

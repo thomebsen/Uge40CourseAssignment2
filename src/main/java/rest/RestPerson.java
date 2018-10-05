@@ -108,13 +108,12 @@ public class RestPerson {
         return fp.getPersonById(id);
     }
 
-    @Path("createPerson")
+    @Path("createperson")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createPerson(String json) throws ParamaterNoMatchException {
         Person p = gson.fromJson(json, Person.class);
-
         if (p.getFirstName() == null || p.getLastName() == null || p.getEmail() == null) {
             throw new ParamaterNoMatchException("Please enter a valid firstname, lastname or email.s");
         } else if ((p.getFirstName().length() <= 1) || (p.getLastName().length() <= 1)) {
@@ -148,4 +147,6 @@ public class RestPerson {
     public List<CityInfo> getAllCityInfo() {
         return fc.getAllCityInfo();
     }
+    
+    
 }

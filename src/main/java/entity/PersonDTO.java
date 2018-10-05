@@ -147,7 +147,7 @@ public class PersonDTO {
 
     @Override
     public String toString() {
-        
+        return "PersonDTO{" + "firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", street=" + street + ", city=" + city + ", zipCode=" + zipCode + '}';
     }
 
     

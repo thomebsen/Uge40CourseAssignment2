@@ -43,13 +43,13 @@ public class main {
         Address a2 = new Address("Nybrovej 107", "HELL YEAH");
         
         
-        p1.addPhones(ph1);
-        a1.setCityInfo(ci);
-        p1.setAddress(a1);
-        
-        p2.addPhones(ph2);
-        p2.setAddress(a2);
-        a2.setCityInfo(ci);
+//        p1.addPhones(ph1);
+//        a1.setCityInfo(ci);
+//        p1.setAddress(a1);
+//        
+//        p2.addPhones(ph2);
+//        p2.setAddress(a2);
+//        a2.setCityInfo(ci);
         
         //fp.addPerson(p1);
         //fp.addPerson(p2);
@@ -63,10 +63,11 @@ public class main {
         //System.out.println(person.getHobbies().toString());
 //        
 //        fp.addPerson(person);
-
+        //System.out.println(fp.getPersonById(5));
+        System.out.println(fp.getPersonWithHobby("Fodbold"));
         //System.out.println("All zipCodes: " + fc.getAllZipCodes());
         //System.out.println(fp.getPersonWithHobby("Fodbold"));
-        System.out.println(fp.getAllPersonsByZip("2800"));
+        //System.out.println(fp.getAllPersonsByZip("2800"));
         //System.out.println(fp.getNumberOfPersonWithHobby("Fodbold"));
         
         //System.out.println(fp.getPersonByPhone("87654321"));
@@ -75,6 +76,8 @@ public class main {
         
         
         //System.out.println(fh.getHobbies(1));
+        
+        System.out.println(fp.getPersonByPhone("222222213123"));
 
     }
 

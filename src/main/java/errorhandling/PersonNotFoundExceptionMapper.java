@@ -28,7 +28,7 @@ public class PersonNotFoundExceptionMapper implements ExceptionMapper<PersonNotF
     public Response toResponse(PersonNotFoundException ex) {
         boolean isDebug = context.getInitParameter("debug").equals("true");
         ErrorMessage err = new ErrorMessage(ex, 404, isDebug);
-        err.setDescription("You tried to call... ");
+        err.setDescription("You tried to find a person, but something went wrong.");
         return Response.status(404)
                 .entity(gson.toJson(err))
                 .type(MediaType.APPLICATION_JSON).build();

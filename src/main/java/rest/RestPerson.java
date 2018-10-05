@@ -133,10 +133,6 @@ public class RestPerson {
 //      //  fp.
 //       // fp.editPerson(person, newName);
 //    }
-
-    
-    
-    
     
     
     @Path("zipcodes")

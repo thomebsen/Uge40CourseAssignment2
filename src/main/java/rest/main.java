@@ -76,6 +76,8 @@ public class main {
         
         
         //System.out.println(fh.getHobbies(1));
+        
+        System.out.println(fp.getPersonByPhone("222222213123"));
 
     }
 

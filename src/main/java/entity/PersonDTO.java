@@ -26,8 +26,8 @@ public class PersonDTO {
     private String zipCode;
     
     //Hobby
-    private List<Hobby> hobbies;
-    private String hobby;
+    //private List<Hobby> hobbies;
+    //private String hobby;
     
     
     //Phone
@@ -38,6 +38,16 @@ public class PersonDTO {
         
     }
     
+//    public PersonDTO(Person person) {
+//        this.firstName = person.getFirstName();
+//        this.lastName = person.getLastName();
+//        this.email = person.getEmail();
+//        this.street = person.getAddress().getStreet();
+//        this.city = person.getAddress().getCityInfo().getCity();
+//        this.zipCode = person.getAddress().getCityInfo().getZipCode();
+//        this.hobby = person.getHobbies().toString();
+//    }
+    
     public PersonDTO(Person person) {
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
@@ -45,7 +55,6 @@ public class PersonDTO {
         this.street = person.getAddress().getStreet();
         this.city = person.getAddress().getCityInfo().getCity();
         this.zipCode = person.getAddress().getCityInfo().getZipCode();
-        this.hobby = person.getHobbies().toString();
     }
 
     public PersonDTO(String firstName, String lastName, String email, String street, String city, String zipCode) {
@@ -79,13 +88,13 @@ public class PersonDTO {
         this.phones = phones;
     }
 
-    public List<Hobby> getHobbies() {
-        return hobbies;
-    }
-
-    public void setHobbies(List<Hobby> hobbies) {
-        this.hobbies = hobbies;
-    }
+//    public List<Hobby> getHobbies() {
+//        return hobbies;
+//    }
+//
+//    public void setHobbies(List<Hobby> hobbies) {
+//        this.hobbies = hobbies;
+//    }
 
 
     public String getStreet() {
@@ -138,7 +147,7 @@ public class PersonDTO {
 
     @Override
     public String toString() {
-        return "PersonDTO{" + "firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", street=" + street + ", city=" + city + ", zipCode=" + zipCode + ", hobbies=" + hobbies + '}';
+        return "PersonDTO{" + "firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", street=" + street + ", city=" + city + ", zipCode=" + zipCode + '}';
     }
 
     

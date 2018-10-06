@@ -28,7 +28,7 @@ public class InternalExceptionMapper implements ExceptionMapper<InternalExceptio
     public Response toResponse(InternalException ex) {
         boolean isDebug = context.getInitParameter("debug").equals("true");
         ErrorMessage err = new ErrorMessage(ex, 500, isDebug);
-        err.setDescription("You tried to call... ");
+        err.setDescription("Please contact support");
         return Response.status(500)
                 .entity(gson.toJson(err))
                 .type(MediaType.APPLICATION_JSON).build();

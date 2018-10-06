@@ -71,7 +71,7 @@ public class FacadePersonTest {
         System.out.println("getPersonWithHobby");
         String hobbyName = "Gladiator";
         FacadePerson instance = new FacadePerson(emf);
-       // List<PersonDTO> expResult = new ArrayList<>();
+        // List<PersonDTO> expResult = new ArrayList<>();
         List<PersonDTO> result = instance.getPersonWithHobby(hobbyName);
         assertThat(result.size(), is(2));
     }
@@ -83,11 +83,11 @@ public class FacadePersonTest {
     public void testGetAllPersonsByZip() {
         System.out.println("getAllPersonsByZip");
         String zipCode = "2620";
-        
+
         FacadePerson instance = new FacadePerson(emf);
         int expResult = 0;
         List<PersonDTO> result = instance.getAllPersonsByZip(zipCode);
-      //  int result = Array.size();
+        //  int result = Array.size();
         assertTrue(expResult < result.size());
     }
 
@@ -103,13 +103,36 @@ public class FacadePersonTest {
         int result = instance.getNumberOfPersonWithHobby(hobbyName);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-      
+
     }
 
+    @Test
+    public void testgetPersonById() {
+        System.out.println("getPersonById");
+        int personid = 1;
+        FacadePerson instance = new FacadePerson(emf);
+        String expResult = instance.getPersonByPhone("42676936").getFirstName();
+        String result = instance.getPersonById(personid).getFirstName();
+        assertEquals(result, expResult);
+
+    }
+
+    @Test
+    public void testgetPersonHobbies() {
+        System.out.println("getPersonHobbies");
+        int personid = 1;
+        FacadePerson instance = new FacadePerson(emf);
+
+        PersonDTO result = instance.getPersonHobbies(personid);
+        assertNotNull(result);
+
+    }
+
+    // getPersonById
     /**
      * Test of addPerson method, of class FacadePerson.
      */
-//    @Test
+//  @Test
 //    public void testAddPerson() {
 //        FacadePerson instance = new FacadePerson(emf);
 //        System.out.println("addPerson");
@@ -122,33 +145,32 @@ public class FacadePersonTest {
 //        }
 //        assertTrue(result);  
 //    }
-
-    /**
-     * Test of editPerson method, of class FacadePerson.
-     */
-    @Test
-    public void testEditPerson() {
-        System.out.println("editPerson");
-        PersonDTO person = null;
-        String newName = "";
-        FacadePerson instance = null;
-        PersonDTO expResult = null;
-        PersonDTO result = instance.editPerson(person, newName);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of deletePerson method, of class FacadePerson.
-     */
-    @Test
-    public void testDeletePerson() {
-        System.out.println("deletePerson");
-        Person person = null;
-        FacadePerson instance = null;
-        instance.deletePerson(person);
-       
-    }
-
+//
+//    /**
+//     * Test of editPerson method, of class FacadePerson.
+//     */
+//    @Test
+//    public void testEditPerson() {
+//        System.out.println("editPerson");
+//        PersonDTO person = null;
+//        String newName = "";
+//        FacadePerson instance = null;
+//        PersonDTO expResult = null;
+//        PersonDTO result = instance.editPerson(person, newName);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of deletePerson method, of class FacadePerson.
+//     */
+//    @Test
+//    public void testDeletePerson() {
+//        System.out.println("deletePerson");
+//        Person person = null;
+//        FacadePerson instance = null;
+//        instance.deletePerson(person);
+//       
+//    }
 }

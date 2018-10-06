@@ -8,6 +8,8 @@ package facade;
 import entity.Person;
 import entity.PersonDTO;
 import errorhandling.PersonNotFoundException;
+import errorhandling.InternalException;
+import errorhandling.ParamaterNoMatchException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -98,7 +100,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public List<PersonDTO> getAllPersonsByZip(String zipCode) {
+    public List<PersonDTO> getAllPersonsByZip(String zipCode)throws ParamaterNoMatchException{
         EntityManager em = emf.createEntityManager();
         List<PersonDTO> persons = null;
         try {
@@ -114,7 +116,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public int getNumberOfPersonWithHobby(String hobbyName) {
+    public int getNumberOfPersonWithHobby(String hobbyName) throws PersonNotFoundException{
         EntityManager em = emf.createEntityManager();
         int personCount = 0;
         List<PersonDTO> persons = null;
@@ -135,7 +137,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public Person addPerson(Person person) {
+    public Person addPerson(Person person) throws InternalException{
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -151,7 +153,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO editPerson(PersonDTO person, String newName) {
+    public PersonDTO editPerson(PersonDTO person, String newName)throws PersonNotFoundException{
         EntityManager em = emf.createEntityManager();
 
         person.setFirstName(newName);
@@ -168,7 +170,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public void deletePerson(Person person) {
+    public void deletePerson(Person person)throws PersonNotFoundException{
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();

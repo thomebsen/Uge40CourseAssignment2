@@ -72,7 +72,7 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<PersonDTO> getPersonWithHobby(@PathParam("hobbyName") String hobbyName) {
+    public List<PersonDTO> getPersonWithHobby(@PathParam("hobbyName") String hobbyName)throws PersonNotFoundException{
         return fp.getPersonWithHobby(hobbyName);
     }
     
@@ -80,7 +80,7 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public int getNumberOfPersonWithHobby(@PathParam("hobbyName") String hobbyName) {
+    public int getNumberOfPersonWithHobby(@PathParam("hobbyName") String hobbyName) throws ParamaterNoMatchException{
         return fp.getNumberOfPersonWithHobby(hobbyName);
     }
     
@@ -88,7 +88,7 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public PersonDTO getPersonByPhone(@PathParam("phoneNum") String phoneNum) {
+    public PersonDTO getPersonByPhone(@PathParam("phoneNum") String phoneNum)throws ParamaterNoMatchException{
         return fp.getPersonByPhone(phoneNum);
     }
 
@@ -96,7 +96,7 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<PersonDTO> getAllPersonsByZip(@PathParam("zipCode") String zipCode) {
+    public List<PersonDTO> getAllPersonsByZip(@PathParam("zipCode") String zipCode)throws InternalException{
         return fp.getAllPersonsByZip(zipCode);
     }
     
@@ -104,7 +104,7 @@ public class RestPerson {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public PersonDTO getPersonById(@PathParam("id") Integer id) {
+    public PersonDTO getPersonById(@PathParam("id") Integer id)throws PersonNotFoundException{
         return fp.getPersonById(id);
     }
 
@@ -136,7 +136,8 @@ public class RestPerson {
     @Path("cityinfo")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CityInfo> getAllCityInfo() {
+    public List<CityInfo> getAllCityInfo()throws InternalException{
+        
         return fc.getAllCityInfo();
     }
     

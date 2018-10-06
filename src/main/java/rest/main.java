@@ -12,6 +12,9 @@ import entity.Person;
 import entity.PersonDTO;
 import entity.Phone;
 import facade.FacadeCityInfo;
+import facade.FacadePerson;
+import java.util.List;
+import javax.persistence.EntityManager;
 import facade.FacadeHobby;
 import facade.FacadePerson;
 import java.util.List;
@@ -26,6 +29,8 @@ public class main {
 
     public static void main(String[] args) {
 
+       
+}
         //Oliver tests:
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         FacadePerson fp = new FacadePerson(emf);
@@ -64,7 +69,6 @@ public class main {
 //        
 //        fp.addPerson(person);
         //System.out.println(fp.getPersonById(5));
-        System.out.println(fp.getPersonWithHobby("Fodbold"));
         //System.out.println("All zipCodes: " + fc.getAllZipCodes());
         //System.out.println(fp.getPersonWithHobby("Fodbold"));
         //System.out.println(fp.getAllPersonsByZip("2800"));
@@ -77,8 +81,6 @@ public class main {
         
         //System.out.println(fh.getHobbies(1));
         
-        System.out.println(fp.getPersonByPhone("222222213123"));
-
     }
 
-}
+

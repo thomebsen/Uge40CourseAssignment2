@@ -28,26 +28,31 @@ import javax.persistence.Persistence;
 public class main {
 
     public static void main(String[] args) {
-
-       
-}
-        //Oliver tests:
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         FacadePerson fp = new FacadePerson(emf);
         FacadeCityInfo fc = new FacadeCityInfo(emf);
         FacadeHobby fh = new FacadeHobby(emf);
-        
-        Person p1 = new Person("wau@wa.dk", "Ulla", "Thomsen");
-        Phone ph1 = new Phone("12345678", "lal");
-        Address a1 = new Address("lyngby", "dlasæ");
-        
-        CityInfo ci = new CityInfo("2800", "Kongens Lyngby");
-        
-        Person p2 = new Person("jdkas@asd.dk", "Oliver", "Lyl");
-        Phone ph2 = new Phone("22222222", "YEET");
-        Address a2 = new Address("Nybrovej 107", "HELL YEAH");
-        
-        
+        System.out.println(fc.getAllZipCodes());
+
+       
+}
+//        //Oliver tests:
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+//        FacadePerson fp = new FacadePerson(emf);
+//        FacadeCityInfo fc = new FacadeCityInfo(emf);
+//        FacadeHobby fh = new FacadeHobby(emf);
+//        
+//        Person p1 = new Person("wau@wa.dk", "Ulla", "Thomsen");
+//        Phone ph1 = new Phone("12345678", "lal");
+//        Address a1 = new Address("lyngby", "dlasæ");
+//        
+//        CityInfo ci = new CityInfo("2800", "Kongens Lyngby");
+//        
+//        Person p2 = new Person("jdkas@asd.dk", "Oliver", "Lyl");
+//        Phone ph2 = new Phone("22222222", "YEET");
+//        Address a2 = new Address("Nybrovej 107", "HELL YEAH");
+//        
+//        
 //        p1.addPhones(ph1);
 //        a1.setCityInfo(ci);
 //        p1.setAddress(a1);

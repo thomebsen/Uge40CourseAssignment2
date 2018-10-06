@@ -33,10 +33,20 @@
                         <h5>Get user by Phone Number</h5>
                         <div class="form-group">
                             <label for="usr">Phone Number:</label>
+                            <input type="number" value="1" id="phoneNumInput" class="form-control" min="1">
+                        </div>
+                        <button id="getUserByNumber" class="btn btn-default">Get User</button>
+                        <div id="userNumberOutput" style="margin-top: 10px;"></div>
+                    </div>
+
+                    <div class="box">
+                        <h5>Get user by Phone Id</h5>
+                        <div class="form-group">
+                            <label for="usr">Phone Number:</label>
                             <input type="number" value="1" id="idInput" class="form-control" min="1">
                         </div>
-                        <button id="getUser" class="btn btn-default">Get User</button>
-                        <div id="userInfoOutput" style="margin-top: 10px;"></div>
+                        <button id="getUserById" class="btn btn-default">Get User</button>
+                        <div id="userIdOutput" style="margin-top: 10px;"></div>
                     </div>
                 </div>
                 <div class="col">
@@ -77,6 +87,16 @@
                                 <input type="email" id="emailInput" class="form-control" placeholder="Email Name"><br>   
                                 <button id="createUser" class="btn btn-default">Create User</button>
                             </div>
+                        </div>
+
+                        <div class="box">
+                            <h5>Get user with given hobby</h5>
+                            <div class="form-group">
+                                <label for="usr">Hobby:</label>
+                                <input type="text" placeholder="Enter a hobby here..." id="hobbyInput" class="form-control">
+                            </div>
+                            <button id="getUserByHobby" class="btn btn-default">Get User</button>
+                            <div id="userHobbyOutput" style="margin-top: 10px;"></div>
                         </div>
                     </div>
                     <div class="col"></div>

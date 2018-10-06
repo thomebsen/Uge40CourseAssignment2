@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 4, 2018, 1:30:35 PM
+    Author     : thoma
+*/
+
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+body {
+    background-color: #efefef;
+}
+
+.box {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 1px 2px 1px 0px silver;
+}
+
+.scrollableDiv {
+    overflow-y: scroll;
+    max-height: 357px;
+}

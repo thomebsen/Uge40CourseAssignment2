@@ -29,7 +29,7 @@ public class ParamaterNoMatchExceptionMapper implements ExceptionMapper<Paramate
     public Response toResponse(ParamaterNoMatchException ex) {
         boolean isDebug = context.getInitParameter("debug").equals("true");
         ErrorMessage err = new ErrorMessage(ex, 400, isDebug);
-        err.setDescription("You tried to call... ");
+        err.setDescription("You entered a wrong parameter.");
         return Response.status(400)
                 .entity(gson.toJson(err))
                 .type(MediaType.APPLICATION_JSON).build();

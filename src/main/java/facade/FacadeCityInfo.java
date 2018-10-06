@@ -47,7 +47,7 @@ public class FacadeCityInfo implements FacadeCityInfoInterface {
         try {
             em.getTransaction().begin();
             //SELECT NEW entity.PersonDTO(p.firstName, p.lastName, p.email) FROM Person p WHERE CityInfo.zipCode =" + zipCode, PersonDTO.class)
-            TypedQuery query = em.createQuery("SELECT z.id, z.city, z.zipCode  From CityInfo z", CityInfo.class);
+            TypedQuery query = em.createQuery("SELECT z.city, z.zipCode  From CityInfo z", CityInfo.class);
             zipCodes = query.getResultList();
             em.getTransaction().commit();
             return zipCodes;

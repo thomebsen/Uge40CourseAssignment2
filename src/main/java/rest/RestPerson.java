@@ -68,24 +68,23 @@ public class RestPerson {
         return gson.toJson(hej);
     }
 
-    @Path("getPersonWithHobby/{hobbyName}")
+    @Path("/person/hobby/{hobbyName}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPersonWithHobby(@PathParam("hobbyName") String hobbyName) throws PersonNotFoundException {
-
-        List<PersonDTO> persons = null;
-        String json = "";
-        try {
-            persons = fp.getPersonWithHobby(hobbyName);
-            json = gson.toJson(persons, PersonDTO.class);
-            return Response.ok(json).build();
-        } catch (Exception e) {
-            throw new PersonNotFoundException("person not found with this hobby");
-        }
+    public List<PersonDTO> getPersonWithHobby(@PathParam("hobbyName") String hobbyName) {
+        return fp.getPersonWithHobby(hobbyName);
     }
     
-    @Path("person/{phoneNum}")
+    @Path("/count/{hobbyName}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int getNumberOfPersonWithHobby(@PathParam("hobbyName") String hobbyName) {
+        return fp.getNumberOfPersonWithHobby(hobbyName);
+    }
+    
+    @Path("/person/phone/{phoneNum}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -93,34 +92,28 @@ public class RestPerson {
         return fp.getPersonByPhone(phoneNum);
     }
 
-    @Path("getAllPersonsByZip/{zipCode}")
+    @Path("/{zipCode}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllPersonsByZip(@PathParam("zipCode") String zipCode) throws PersonNotFoundException, InternalException {
-        List<PersonDTO> persons = null;
-        String json = "";
-        try {
-            List<CityInfo> allZips = fc.getAllZipCodes();
-            if (allZips.contains(zipCode)) {
-                persons = fp.getAllPersonsByZip(zipCode);
-                json = gson.toJson(persons, PersonDTO.class);
-                return Response.ok(json).build();
-            } else {
-                throw new PersonNotFoundException("No persons found with this zipCode");
-            }
-        } catch (Exception e) {
-            throw new InternalException("something went wrong try Remember to vote Saxton");
-        }
+    public List<PersonDTO> getAllPersonsByZip(@PathParam("zipCode") String zipCode) {
+        return fp.getAllPersonsByZip(zipCode);
+    }
+    
+    @Path("/person/id/{id}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public PersonDTO getPersonById(@PathParam("id") Integer id) {
+        return fp.getPersonById(id);
     }
 
-    @Path("createPerson")
+    @Path("createperson")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createPerson(String json) throws ParamaterNoMatchException {
         Person p = gson.fromJson(json, Person.class);
-
         if (p.getFirstName() == null || p.getLastName() == null || p.getEmail() == null) {
             throw new ParamaterNoMatchException("Please enter a valid firstname, lastname or email.s");
         } else if ((p.getFirstName().length() <= 1) || (p.getLastName().length() <= 1)) {
@@ -139,10 +132,6 @@ public class RestPerson {
 //      //  fp.
 //       // fp.editPerson(person, newName);
 //    }
-
-    
-    
-    
     
     
     @Path("zipcodes")
@@ -158,4 +147,6 @@ public class RestPerson {
     public List<CityInfo> getAllCityInfo() {
         return fc.getAllCityInfo();
     }
+    
+    
 }

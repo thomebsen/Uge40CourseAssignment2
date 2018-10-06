@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,15 +41,15 @@ public class Person implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Hobby> hobbies = new ArrayList();
 
     public Person() {
     }
 
-    public Person(String email, String frirstName, String lastName) {
+    public Person(String email, String firstName, String lastName) {
         this.email = email;
-        this.firstName = frirstName;
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 
@@ -134,7 +135,9 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Person[ id=" + id + " ]";
+        return "Person{" + "id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + '}';
     }
+
+    
 
 }

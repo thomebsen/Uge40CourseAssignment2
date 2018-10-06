@@ -63,4 +63,9 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Hobby{" + "hobbyName=" + hobbyName + ", description=" + description + ", persons=" + persons + '}';
+    }
+
 }

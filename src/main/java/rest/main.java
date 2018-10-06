@@ -15,6 +15,9 @@ import facade.FacadeCityInfo;
 import facade.FacadePerson;
 import java.util.List;
 import javax.persistence.EntityManager;
+import facade.FacadeHobby;
+import facade.FacadePerson;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -26,10 +29,6 @@ public class main {
 
     public static void main(String[] args) {
 
-        //Oliver tests:
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("putest");
-        EntityManager em = emf.createEntityManager();
-        
-        
-    }
+       
+}
 }

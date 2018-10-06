@@ -43,7 +43,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO getPersonById(Integer id) {
+    public PersonDTO getPersonById(Integer id) throws PersonNotFoundException{
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -53,7 +53,10 @@ public class FacadePerson implements FacadePersonInterface {
             em.getTransaction().commit();
             return person;
             
-        } finally {
+        } catch(Exception e) {
+            throw new PersonNotFoundException("Person not found, try entering another ID");
+        }
+        finally {
             em.close();
         }
     }
@@ -69,7 +72,7 @@ public class FacadePerson implements FacadePersonInterface {
             em.getTransaction().commit();
             return person;
         } catch (Exception e) {
-            throw new PersonNotFoundException("Person not found.");
+            throw new PersonNotFoundException("Person not found, please make sure that you entered a correct phonenumber.");
         } finally {
             em.close();
         }
@@ -77,7 +80,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public List<PersonDTO> getPersonWithHobby(String hobbyName) {
+    public List<PersonDTO> getPersonWithHobby(String hobbyName) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         List<PersonDTO> persons = null;
         try {
@@ -87,6 +90,8 @@ public class FacadePerson implements FacadePersonInterface {
             persons = query.getResultList();
             em.getTransaction().commit();
             return persons;
+        } catch(Exception e) {
+            throw new PersonNotFoundException("Could not find any user with that hobby.");
         } finally {
             em.close();
         }

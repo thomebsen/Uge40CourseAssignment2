@@ -123,15 +123,7 @@ public class RestPerson {
         return Response.ok(json).build();
     }
 
-//    @Path("editPerson/{phoneNumber}")
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response editPerson(@PathParam("newName") String newName, @PathParam("phoneNumber") String phoneNumber) throws ParamaterNoMatchException {
-//        
-//      //  fp.
-//       // fp.editPerson(person, newName);
-//    }
+
     
     
     @Path("zipcodes")

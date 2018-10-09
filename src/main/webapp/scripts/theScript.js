@@ -26,7 +26,7 @@ function getAllZipCodes() {
     var zipLabel = '<label style="margin-right: 8px;">' + "ZIP: " + '</label>';
     allZipCodeDiv.style.display = "block"; //The zipCodeDiv's display s set to display:block to unhide it.
     
-    $.getJSON('http://localhost:8084/Uge40CourseAssignment2/api/data/zipcodes', function (data) { //fetch data
+    $.getJSON("api/data/zipcodes", function (data) { //fetch data
         var dataObject = data;
         var listItemString = $('#zipListItem').html(); //get the div "zipListitem
         
@@ -49,7 +49,7 @@ function getAllZipAndCity() {
     var cityLabel = '<label style="margin-right: 8px;">' + "CITY: " + '</label>';
     var zipLabel = '<label style="margin-right: 8px;">' + "ZIP: " + '</label>';
     allZipCodeDiv.style.display = "block";
-    $.getJSON('http://localhost:8084/Uge40CourseAssignment2/api/data/cityinfo', function (data) {
+    $.getJSON("api/data/cityinfo", function (data) {
         var dataObject = data;
         var listItemString = $('#zipListItem').html();
         dataObject.forEach(buildNewList); //For each dataObject we have, run the buildNewList() function.
@@ -71,7 +71,7 @@ function getAllZipAndCity() {
 
 function getUserByPhoneNumber() {
     var phoneNum = document.getElementById("phoneNumInput").value; //get the value of the input field.
-    fetch("http://localhost:8084/Uge40CourseAssignment2/api/data/person/phone/" + phoneNum) //the fecth
+    fetch("api/data/person/phone/" + phoneNum) //the fecth
             .then(response => {
                 if (!response.ok) {
                     throw response;
@@ -93,13 +93,13 @@ function getUserByPhoneNumber() {
             })
             .catch(err => { //if we catch an error
                 err.text().then(errorMessage => {
-                    var recievedError = JSON.parse(errorMessage);
+                    //var recievedError = JSON.parse(errorMessage);
                     
                     //Insert a bootstrap alertbot into the "alertContainer" div.
                     document.getElementById("alertContainer").innerHTML =
                             '<div class="alert alert-danger alert-dismissible fade show text-center">' +
                             '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                            recievedError.code + " " + recievedError.message + "<br>" + recievedError.description;
+                            //recievedError.code + " " + recievedError.message + "<br>" + recievedError.description;
                     '</div>';
                 });
             });
@@ -109,7 +109,7 @@ function getUserByPhoneNumber() {
 //This function works the same as the getUserByPhoneNumber function.
 function getUserById() {
     var id = document.getElementById("idInput").value;
-    fetch("http://localhost:8084/Uge40CourseAssignment2/api/data/person/id/" + id)
+    fetch("api/data/person/id/" + id)
             .then(response => {
                 if (!response.ok) {
                     throw response;
@@ -144,7 +144,7 @@ function getUserById() {
 //This function works the same as the getUserByPhoneNumber function.
 function getUserWithHobby() {
     var hobby = document.getElementById("hobbyInput").value;
-    fetch("http://localhost:8084/Uge40CourseAssignment2/api/data/person/hobby/" + hobby)
+    fetch("api/data/person/hobby/" + hobby)
             .then(response => {
                 if (!response.ok) {
                     throw response;

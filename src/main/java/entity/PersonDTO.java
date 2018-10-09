@@ -57,14 +57,14 @@ public class PersonDTO {
         this.zipCode = person.getAddress().getCityInfo().getZipCode();
     }
 
-    public PersonDTO(String firstName, String lastName, String email, String street, String city, String zipCode) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.street = street;
-        this.city = city;
-        this.zipCode = zipCode;
-    }
+//    public PersonDTO(String firstName, String lastName, String email, String street, String city, String zipCode) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.street = street;
+//        this.city = city;
+//        this.zipCode = zipCode;
+//    }
 
 //    public PersonDTO(String firstName, String lastName, String email, String street, String city, String zipCode, List<Hobby> hobbies) {
 //        this.firstName = firstName;

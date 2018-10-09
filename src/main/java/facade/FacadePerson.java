@@ -5,8 +5,11 @@
  */
 package facade;
 
+import entity.Address;
+import entity.CityInfo;
 import entity.Person;
 import entity.PersonDTO;
+import entity.Phone;
 import errorhandling.PersonNotFoundException;
 import errorhandling.InternalException;
 import errorhandling.ParamaterNoMatchException;
@@ -45,7 +48,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO getPersonById(Integer id) throws PersonNotFoundException{
+    public PersonDTO getPersonById(Integer id) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -54,15 +57,14 @@ public class FacadePerson implements FacadePersonInterface {
             PersonDTO person = query.getSingleResult();
             em.getTransaction().commit();
             return person;
-            
-        } catch(Exception e) {
+
+        } catch (Exception e) {
             throw new PersonNotFoundException("Person not found, try entering another ID");
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
-    
+
     @Override
     public PersonDTO getPersonByPhone(String number) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
@@ -82,6 +84,24 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
+    public Person getPersonByEmail(String email) throws PersonNotFoundException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            TypedQuery<Person> query = em.createQuery("SELECT new entity.PersonDTO(p) FROM Person p WHERE p.email = :email", Person.class);
+            query.setParameter("email", email);
+            Person person = query.getSingleResult();
+            em.getTransaction().commit();
+            return person;
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Person not found, please make sure that you entered a correct email.");
+        } finally {
+            em.close();
+        }
+
+    }
+
+    @Override
     public List<PersonDTO> getPersonWithHobby(String hobbyName) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         List<PersonDTO> persons = null;
@@ -92,7 +112,7 @@ public class FacadePerson implements FacadePersonInterface {
             persons = query.getResultList();
             em.getTransaction().commit();
             return persons;
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new PersonNotFoundException("Could not find any user with that hobby.");
         } finally {
             em.close();
@@ -100,7 +120,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public List<PersonDTO> getAllPersonsByZip(String zipCode)throws ParamaterNoMatchException{
+    public List<PersonDTO> getAllPersonsByZip(String zipCode) throws ParamaterNoMatchException {
         EntityManager em = emf.createEntityManager();
         List<PersonDTO> persons = null;
         try {
@@ -116,7 +136,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public int getNumberOfPersonWithHobby(String hobbyName) throws PersonNotFoundException{
+    public int getNumberOfPersonWithHobby(String hobbyName) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         int personCount = 0;
         List<PersonDTO> persons = null;
@@ -137,7 +157,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public Person addPerson(Person person) throws InternalException{
+    public Person addPerson(Person person) throws InternalException {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -153,7 +173,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public PersonDTO editPerson(PersonDTO person, String newName)throws PersonNotFoundException{
+    public PersonDTO editPerson(PersonDTO person, String newName) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
 
         person.setFirstName(newName);
@@ -170,7 +190,7 @@ public class FacadePerson implements FacadePersonInterface {
     }
 
     @Override
-    public void deletePerson(Person person)throws PersonNotFoundException{
+    public void deletePerson(Person person) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -179,6 +199,27 @@ public class FacadePerson implements FacadePersonInterface {
 
         } catch (Exception e) {
             throw new PersonNotFoundException("Person not found");
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public void addPhone(String email, String number) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p WHERE p.email = :email", Person.class);
+            query.setParameter("email", email);
+            Person person = query.getSingleResult();
+            
+            Phone phone = new Phone();
+            phone.setNumber(number);
+            
+            person.addPhones(phone);
+            em.merge(person);
+            em.getTransaction().commit();
+
         } finally {
             em.close();
         }

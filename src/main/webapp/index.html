@@ -40,13 +40,22 @@
                     </div>
 
                     <div class="box">
-                        <h5>Get user by Phone Id</h5>
+                        <h5>Get user by id</h5>
                         <div class="form-group">
-                            <label for="usr">Phone Number:</label>
+                            <label for="usr">id:</label>
                             <input type="number" value="1" id="idInput" class="form-control" min="1">
                         </div>
                         <button id="getUserById" class="btn btn-default">Get User</button>
                         <div id="userIdOutput" style="margin-top: 10px;"></div>
+                    </div>
+                    <div class="box">
+                        <h5>Get user with given hobby</h5>
+                        <div class="form-group">
+                            <label for="usr">Hobby:</label>
+                            <input type="text" placeholder="Enter a hobby here..." id="hobbyInput" class="form-control">
+                        </div>
+                        <button id="getUserByHobby" class="btn btn-default">Get User</button>
+                        <div id="userHobbyOutput" style="margin-top: 10px;"></div>
                     </div>
                 </div>
                 <div class="col">
@@ -80,26 +89,31 @@
                     <div class="col">
                         <div class="box">
                             <div class="form-group">
-                                <h5>Create User - Fill in everthing.</h5>
+                                <h5>Add person to database</h5>
+                                <h6>- Fill in everything</h6>
                                 <br>
                                 <input type="text" id="firstNameInput" class="form-control" placeholder="First Name"><br>
                                 <input type="text" id="lastNameInput" class="form-control" placeholder="Last Name"><br>
                                 <input type="email" id="emailInput" class="form-control" placeholder="Email Name"><br>   
+                                <input type="text" id="streetInput" class="form-control" placeholder="Street name"><br>
+                                <input type="text" id="cityInput" class="form-control" placeholder="City"><br>
+                                <input type="text" id="zipcodeInput" class="form-control" placeholder="Zipcode"><br>  
                                 <button id="createUser" class="btn btn-default">Create User</button>
                             </div>
                         </div>
 
+
+                    </div>
+                    <div class="col">
                         <div class="box">
-                            <h5>Get user with given hobby</h5>
-                            <div class="form-group">
-                                <label for="usr">Hobby:</label>
-                                <input type="text" placeholder="Enter a hobby here..." id="hobbyInput" class="form-control">
-                            </div>
-                            <button id="getUserByHobby" class="btn btn-default">Get User</button>
-                            <div id="userHobbyOutput" style="margin-top: 10px;"></div>
+                            <h5>Add a phone number</h5>
+                            <p>Please enter your email</p>
+                            <input type="email" id="emailInput2" class="form-control" placeholder="Email Name"><br>
+                            <p>And now the phone number you want to add</p>
+                            <input type="number" id="phoneInput" class="form-control" placeholder="Phone number"><br>
+                            <button id="addPhone" class="btn btn-default">Add phone number</button>
                         </div>
                     </div>
-                    <div class="col"></div>
                 </div>
             </div>
         </div>

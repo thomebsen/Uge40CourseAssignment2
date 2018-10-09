@@ -23,4 +23,6 @@ public interface FacadePersonInterface {
     public void deletePerson(Person person);
     public PersonDTO getPersonHobbies(Integer id);
     public PersonDTO getPersonById(Integer id);
+    public Person getPersonByEmail(String email);
+    public void addPhone(String email, String number);
 }
